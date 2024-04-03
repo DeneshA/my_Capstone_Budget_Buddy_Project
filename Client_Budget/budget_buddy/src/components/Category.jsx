@@ -9,6 +9,8 @@ export default function Category() {
     const [description, setDescription] = useState('')
     const [isActive, setIsActive] = useState(true)
 
+    const [categorylist, setCategoryList] = useState([])
+
     const [alertMessage,setAlertMessage] = useState('')
     const [alertType, setAlertType] = useState('')
 
@@ -17,6 +19,8 @@ export default function Category() {
             axios.get('http://localhost:8000/category/')
                 .then(response => {
                     console.log(response.data)
+                    setCategoryList(response.data)
+                    console.log(categotylist)
                     setAlertMessage('Successfully Saved')
                     setAlertType('success')
                     handleClear()
@@ -102,9 +106,9 @@ export default function Category() {
                         value={categoryName}
                         onChange={e => setCategoryName(e.target.value)}
                     />
-                    <select name="category_list"
+                    {/* <select name="category_list"
                         id="category_list">Category List</select>
-                    <option></option>
+                    <option></option> */}
                 </div>
                 <div className="form-floating">
                     <label htmlFor="category_type">Category Type : </label>
@@ -150,6 +154,38 @@ export default function Category() {
                 </div>
 
             </form>
+
+            <div className="category-display">
+                <table className="table-category-list">
+                        <thead>
+                            <tr>
+                                <th>Category Name </th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Active</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                categorylist.map((list,index) => (
+                                    <tr key={index}>
+                                        <td>{list.category_name}</td>
+                                        <td>{list.category_type}</td>
+                                        <td>{list.description}</td>
+                                        <td>{<input type='checkbox' checked={list.is_active} readOnly={true} />}</td>
+                                        <td>
+                                            <div className="modify-btn">
+                                                {/* /<div className='delete-milestone' onClick={() => deleteMilestone(index)} ><i className="fa-solid fa-trash"></i></div> */}
+                                                <div className="delete-category" ><i className="fa-solid fa-trash"></i></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
+                </table>
+
+            </div>
         </div>
 
 
