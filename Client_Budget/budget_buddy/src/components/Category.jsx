@@ -1,6 +1,11 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
+
+import '../styles/Category.css'
+
 export default function Category() {
 
     const [categoryid, setCategoryId] = useState('')
@@ -20,12 +25,15 @@ export default function Category() {
                 .then(response => {
                     console.log(response.data)
                     setCategoryList(response.data)
-                    console.log(categotylist)
+                    console.log(categorylist)
                     setAlertMessage('Successfully Saved')
                     setAlertType('success')
                     handleClear()
                     //Setting timeout to clear the Alert MSG
-                    setTimeout( () => setAlertMessage(''),3000)
+                    setTimeout( () => {
+                        setAlertMessage('') 
+                        setAlertType('')}
+                            ,3000)
                 })
                 .catch(error => {
                     setAlertMessage("You got an error : " + (error.response ? error.response.data : error.message))
@@ -65,7 +73,7 @@ export default function Category() {
     const handleUpdate = async (e) => {
         e.preventDefault()
         try {
-            const response = await axios.put(`http://localhost:8000/category/${id}`, {
+            const response = await axios.put(`http://localhost:8000/category/${categoryid}/`, {
                 category_name: categoryName,
                 category_type: categoryType,
                 description,
@@ -87,6 +95,14 @@ export default function Category() {
         }
     }
 
+    const handlePassValues = (category) => {
+        setCategoryId(category.id)
+        setCategoryName(category.category_name)
+        setCategoryType(category.category_type)
+        setDescription(category.description)
+        setIsActive(category.is_active)
+    }
+
     const handleClear = () => {
         setCategoryName('')
         setCategoryType('None')
@@ -96,7 +112,7 @@ export default function Category() {
 
     return (
         <div className="category-container">
-            <h3>Set up Category</h3>
+            <h3>SET UP CATEGORY</h3>
             <form onSubmit={handleSubmit}>
                 <div className="form-floating">
                     <label htmlFor="category_name">Category Name : </label>
@@ -149,8 +165,8 @@ export default function Category() {
                 <div className="form-floating">
                     <button type="button" className="btn" id="clear-btn" onClick={handleClear}>CLEAR</button>
                     <button type="submit" className="btn" id="save-btn">SAVE</button>
-                    <button type="button" className="btn" id="edit-btn">EDIT</button>
-                    <button type="button" className="btn" id="delete-btn">DELETE</button>
+                    <button type="button" className="btn" id="edit-btn" onClick={handleUpdate}>EDIT</button>
+                    {/* <button type="button" className="btn" id="delete-btn">DELETE</button> */}
                 </div>
 
             </form>
@@ -159,16 +175,16 @@ export default function Category() {
                 <table className="table-category-list">
                         <thead>
                             <tr>
-                                <th>Category Name </th>
-                                <th>Type</th>
-                                <th>Description</th>
-                                <th>Active</th>
+                                <th>CATEGORY NAME </th>
+                                <th>TYPE</th>
+                                <th>DESCRIPTION</th>
+                                <th>ACTIVE</th>
                             </tr>
                         </thead>
                         <tbody>
                             {
                                 categorylist.map((list,index) => (
-                                    <tr key={index}>
+                                    <tr key={index} onDoubleClick={() => handlePassValues(list)}>
                                         <td>{list.category_name}</td>
                                         <td>{list.category_type}</td>
                                         <td>{list.description}</td>
@@ -176,7 +192,7 @@ export default function Category() {
                                         <td>
                                             <div className="modify-btn">
                                                 {/* /<div className='delete-milestone' onClick={() => deleteMilestone(index)} ><i className="fa-solid fa-trash"></i></div> */}
-                                                <div className="delete-category" ><i className="fa-solid fa-trash"></i></div>
+                                                <div className="delete-category" ><FontAwesomeIcon icon={faTrashCan} /></div>
                                             </div>
                                         </td>
                                     </tr>
