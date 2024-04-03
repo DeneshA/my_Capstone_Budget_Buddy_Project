@@ -1,0 +1,18 @@
+.Footer {
+    margin-top: auto;
+  }
+  .footer-container {
+      /* display: grid; */
+      /* margin-top: auto; */
+      display: flex;
+      justify-content: center;
+      grid-template-columns: 60% 40%;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      height: 15%;
+      width: 100%;
+      background-color:#333;
+      color: white;
+    }
+    

@@ -1,0 +1,15 @@
+.alert {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    color: #fff;
+    text-align: center;
+}
+
+.alert-success {
+    background-color: #4CAF50; /* Green */
+}
+
+.alert-error {
+    background-color: #f44336; /* Red */
+}
