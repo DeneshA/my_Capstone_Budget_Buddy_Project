@@ -25,8 +25,7 @@ This GitHub project involves the development of a comprehensive full-stack appli
 
 # ERD 
 
-![alt text](image-3.png)
 
 # Technology Architecture
 
-![alt text](image-9.png) 
+![alt text](image-3.png)
