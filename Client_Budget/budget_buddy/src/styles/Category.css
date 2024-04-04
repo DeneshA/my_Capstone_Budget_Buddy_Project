@@ -54,7 +54,8 @@
     cursor: pointer;
     border-radius: 5px;
     /* Space between buttons */
-    /* margin-right: 10px;  */
+    margin-right: 10px; 
+    margin-bottom: 2px;
   }
   
   .btn:hover {
