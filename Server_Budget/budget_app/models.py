@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Category(models.Model):
@@ -14,7 +15,9 @@ class Category(models.Model):
 class Income(models.Model):
     PAY_TERMS = [('Daily', 'Daily'), ('Weekly', 'Weekly'), ('Bi-Weekly', 'Bi-Weekly'), ('Monthly', 'Monthly'), ('Annually', 'Annually')]
     DURATION_TERM = [('Month', 'Month'), ('Year', 'Year')]
+    # user_id = models.CharField(max_length=100)  # using Django's built-in User model
     user_id = models.ForeignKey('auth.User', on_delete=models.CASCADE)  # using Django's built-in User model
+    # user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='incomes')  # using Django's built-in User model
     category_id = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='incomes')
     duration = models.IntegerField()
     duration_terms = models.CharField(max_length=20, choices=DURATION_TERM)

@@ -1,7 +1,10 @@
 from rest_framework import generics
-from .serializers import CategorySerializer,IncomeSerializer
+from .serializers import CategorySerializer,IncomeSerializer,UserSerializer
 from .models import Category,Income
 from django.shortcuts import render
+from django.contrib.auth.models import User
+from rest_framework import viewsets
+from rest_framework import permissions
 
 # Create your views here.
 class CategoryList(generics.ListCreateAPIView):
@@ -19,3 +22,8 @@ class IncomeList(generics.ListCreateAPIView):
 class IncomeDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Income.objects.all()
     serializer_class = IncomeSerializer
+    
+class UserViewSet (viewsets.ReadOnlyModelViewSet):
+    # permission_classes = [permissions.IsAuthenticated]
+    queryset = User.objects.all()
+    serializer_class = UserSerializer

@@ -17,9 +17,16 @@ Including another URLconf
 from django.conf.urls import include
 from django.urls import path
 from django.contrib import admin
+from rest_framework.routers import DefaultRouter
+from budget_app.views import UserViewSet
+from rest_framework import routers, serializers, viewsets
 
+router = routers.DefaultRouter()
+router.register(r'users',UserViewSet)
+# router.register(r'Income',)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('budget_app.urls')),
+    path('',include(router.urls)),
     path('api-auth', include('rest_framework.urls', namespace='rest_framework'))
 ]
