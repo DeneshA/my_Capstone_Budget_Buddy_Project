@@ -1,15 +1,115 @@
-.alert {
+:root {
+    --primary-green: #4CAF50; /* A vibrant green */
+    --dark-green: #388E3C; /* A darker shade for contrasts or hover effects */
+    --light-green: #C8E6C9; /* A light green for backgrounds or accents */
+    --error-red: #f44336; /* Keeping the error color as it is essential for UX */
+  }
+  
+  body, html {
+    margin: 10px;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--light-green); /* Light background for the whole page */
+  }
+  
+  .category-container {
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px black;
+    background-color: white;
+    max-width: 800px; /* Ensures container doesn't stretch too much on wider screens */
+    
+  }
+  .category-display{
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+  }
+  .form-floating {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+  }
+  
+  .form-floating label {
+    margin-bottom: 5px;
+    text-align: left;
+    color: var(--dark-green); /* Dark green text for better readability and theme consistency */
+  }
+  
+  .form-floating input[type="text"],
+  .form-floating select,
+  .form-floating input[type="checkbox"] {
+    padding: 10px;
+    border: 1px solid var(--primary-green);
+    border-radius: 4px;
+    margin-bottom: 10px; /* Ensures spacing between elements */
+  }
+  
+  .btn {
+    background-color: var(--primary-green);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    /* Space between buttons */
+    /* margin-right: 10px;  */
+  }
+  
+  .btn:hover {
+    background-color: var(--dark-green);
+  }
+  
+  .alert {
     margin-bottom: 20px;
     padding: 10px;
     border-radius: 5px;
     color: #fff;
     text-align: center;
-}
-
-.alert-success {
-    background-color: #4CAF50; /* Green */
-}
-
-.alert-error {
-    background-color: #f44336; /* Red */
-}
+  }
+  
+  .alert-success {
+    background-color: var(--primary-green);
+  }
+  
+  .alert-error {
+    background-color: var(--error-red);
+  }
+  
+  /* Table Styles */
+  .table-category-list {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table-category-list th, .table-category-list td {
+    text-align: left;
+    padding: 8px;
+  }
+  
+  .table-category-list tr:nth-child(even) {
+    background-color: var(--light-green);
+  }
+  
+  thead{
+    background-color: #388E3C;
+    width: 100%;
+    color: white;
+  }
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .form-floating {
+      flex-direction: column;
+    }
+  
+    .btn {
+      width: 100%; /* Makes button full width on smaller screens */
+      margin-bottom: 10px; /* Adds space between stacked buttons */
+    }
+  
+    .category-container {
+      margin: 10px;
+      padding: 15px;
+    }
+  }

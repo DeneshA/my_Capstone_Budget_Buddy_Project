@@ -1,4 +1,12 @@
+:root {
+  --primary-green: #4CAF50; /* A vibrant green */
+  --dark-green: #388E3C; /* A darker shade for contrasts or hover effects */
+  --light-green: #C8E6C9; /* A light green for backgrounds or accents */
+  --error-red: #f44336; /* Keeping the error color as it is essential for UX */
+}
+
 /* Show it is fixed to the top */
+
 body {
     min-height: 75rem;
     padding-top: 4.5rem;
@@ -8,7 +16,8 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: #333;
+    /* background-color: #333; */
+    background-color: var(--primary-green);
     color: #fff;
     position: fixed; 
     top: 0; 

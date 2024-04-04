@@ -19,34 +19,44 @@ export default function Category() {
     const [alertMessage,setAlertMessage] = useState('')
     const [alertType, setAlertType] = useState('')
 
+    
+    //Setting timeout to clear the Alert MSG
+    const handleAlertTimer = () => {
+        setTimeout( () => {
+            setAlertMessage('') 
+            setAlertType('')}
+                ,3000)
+    }
+    const fetchData = () => {
+        axios.get('http://localhost:8000/category/')
+            .then(response => {
+                console.log(response.data)
+                setCategoryList(response.data)
+                console.log(categorylist)                
+                handleClear()
+                
+            })
+            .catch(error => {
+                setAlertMessage("Error Unable to fetch records : " + (error.response ? error.response.data : error.message))
+                setAlertType("error")
+                handleAlertTimer()
+            })
+    }
     useEffect(() => {
-        const fetchDate = () => {
-            axios.get('http://localhost:8000/category/')
-                .then(response => {
-                    console.log(response.data)
-                    setCategoryList(response.data)
-                    console.log(categorylist)
-                    setAlertMessage('Successfully Saved')
-                    setAlertType('success')
-                    handleClear()
-                    //Setting timeout to clear the Alert MSG
-                    setTimeout( () => {
-                        setAlertMessage('') 
-                        setAlertType('')}
-                            ,3000)
-                })
-                .catch(error => {
-                    setAlertMessage("You got an error : " + (error.response ? error.response.data : error.message))
-                    setAlertType("error")
-                })
-        }
+       
 
-        fetchDate()
+        fetchData()
     },[])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        // console.log({ categoryName, categoryType, description, isActive })
+        if(categoryType === "None"){
+            setAlertMessage('Select a category type')
+            setAlertType('error')
+            handleAlertTimer()
+            return
+
+        }
         try {
             const response = await axios.post('http://localhost:8000/category/', {
                 category_name: categoryName,
@@ -59,19 +69,34 @@ export default function Category() {
                 }
             })
             if (response.data) {
-                console.log("Sucessfully saved")
+                setAlertMessage('Saved successfully Saved')
+                setAlertType('success')
+                fetchData()
                 handleClear()
             } else {
-                console.log("Unable to save category !")
+                // console.log("Unable to save category !")
+                setAlertMessage('Unable to save category')
+                setAlertType('error')
             }
-            console.log(response.data)
+            
+            // console.log(response.data)
         } catch (error) {
             console.error('There was an error!', error.response ? error.response.data : error.message)
+            setAlertMessage('Unable to process save operation')
+            setAlertType('error')
         }
+        handleAlertTimer()
+        
+    
     }
 
     const handleUpdate = async (e) => {
         e.preventDefault()
+        if(!categoryid || categoryType ==="None"){
+            setAlertMessage('Select a Category/Type')
+            setAlertType('error')
+            return
+        }
         try {
             const response = await axios.put(`http://localhost:8000/category/${categoryid}/`, {
                 category_name: categoryName,
@@ -84,15 +109,42 @@ export default function Category() {
                 }
             })
             if (response.data) {
-                console.log("Sucessfully updated")
+                setAlertMessage('Successfully Updated')
+                setAlertType('success')
                 handleClear()
+                fetchData()
             } else {
-                console.log("Unable to update category !")
+                setAlertMessage('Unable to update')
+                setAlertType('error')
             }
-            console.log(response.data)
+            // console.log(response.data)
         } catch (error) {
             console.error('There was an error!', error.response ? error.response.data : error.message)
+            setAlertMessage('Unable to process update operation')
+            setAlertType('error')
         }
+        handleAlertTimer()
+        
+    }
+
+    const handleDelete = (categoryid) => {
+        axios.delete(`http://localhost:8000/category/${categoryid}/`)
+        .then(() => 
+            {
+                //Remove the deleted category  from the list
+                const updateCategories = categorylist.filter(category => category.id !== categoryid)
+                setCategoryList(updateCategories)
+                setAlertMessage('Category deleted successfully')
+                setAlertType('success')
+                fetchData()
+            })
+        .catch(error => {
+                console.error("Error deleting the category : ",error.response ? error.response.data : error.message)
+                setAlertMessage('Failed to detele category !')
+                setAlertType('error')
+        })
+        handleAlertTimer()
+        
     }
 
     const handlePassValues = (category) => {
@@ -113,18 +165,16 @@ export default function Category() {
     return (
         <div className="category-container">
             <h3>SET UP CATEGORY</h3>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>                
                 <div className="form-floating">
-                    <label htmlFor="category_name">Category Name : </label>
+                <label htmlFor="category_name">Category Name : </label>                
                     <input type="text"
                         placeholder="Category Name"
                         id="category_name"
+                        required
                         value={categoryName}
                         onChange={e => setCategoryName(e.target.value)}
                     />
-                    {/* <select name="category_list"
-                        id="category_list">Category List</select>
-                    <option></option> */}
                 </div>
                 <div className="form-floating">
                     <label htmlFor="category_type">Category Type : </label>
@@ -144,6 +194,7 @@ export default function Category() {
                         placeholder="Description"
                         id="description"
                         value={description}
+                        required
                         onChange={e => setDescription(e.target.value)}
                     />
                 </div>
@@ -155,6 +206,12 @@ export default function Category() {
                         onChange={e => setIsActive(e.target.checked)} />
 
                 </div>
+                
+                <div className="form-floating">
+                    <button type="button" className="btn" id="clear-btn" onClick={handleClear}>CLEAR</button>
+                    <button type="submit" className="btn" id="save-btn">SAVE</button>
+                    <button type="button" className="btn" id="edit-btn" onClick={handleUpdate}>EDIT</button>
+                </div>
                 <div className="alert-container">
                     {alertMessage && (
                         <div className={`alert ${alertType === 'success' ? 'alert-success' : 'alert-error'}`}>
@@ -162,13 +219,6 @@ export default function Category() {
                         </div>
                     )}
                 </div>
-                <div className="form-floating">
-                    <button type="button" className="btn" id="clear-btn" onClick={handleClear}>CLEAR</button>
-                    <button type="submit" className="btn" id="save-btn">SAVE</button>
-                    <button type="button" className="btn" id="edit-btn" onClick={handleUpdate}>EDIT</button>
-                    {/* <button type="button" className="btn" id="delete-btn">DELETE</button> */}
-                </div>
-
             </form>
 
             <div className="category-display">
@@ -179,6 +229,7 @@ export default function Category() {
                                 <th>TYPE</th>
                                 <th>DESCRIPTION</th>
                                 <th>ACTIVE</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -190,9 +241,8 @@ export default function Category() {
                                         <td>{list.description}</td>
                                         <td>{<input type='checkbox' checked={list.is_active} readOnly={true} />}</td>
                                         <td>
-                                            <div className="modify-btn">
-                                                {/* /<div className='delete-milestone' onClick={() => deleteMilestone(index)} ><i className="fa-solid fa-trash"></i></div> */}
-                                                <div className="delete-category" ><FontAwesomeIcon icon={faTrashCan} /></div>
+                                            <div className="modify-btn">        
+                                                <div className="delete-category" onClick={() => handleDelete(list.id)}><FontAwesomeIcon icon={faTrashCan} /></div>
                                             </div>
                                         </td>
                                     </tr>

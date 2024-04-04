@@ -1,3 +1,10 @@
+:root {
+  --primary-green: #4CAF50; /* A vibrant green */
+  --dark-green: #388E3C; /* A darker shade for contrasts or hover effects */
+  --light-green: #C8E6C9; /* A light green for backgrounds or accents */
+  --error-red: #f44336; /* Keeping the error color as it is essential for UX */
+}
+
 .Footer {
     margin-top: auto;
   }
@@ -12,7 +19,8 @@
       left: 0;
       height: 15%;
       width: 100%;
-      background-color:#333;
+      /* background-color:#333; */
+      background-color: var(--primary-green);
       color: white;
     }
     
