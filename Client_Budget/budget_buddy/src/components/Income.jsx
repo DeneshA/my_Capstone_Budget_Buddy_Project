@@ -70,7 +70,13 @@ export default function Income(){
 
     const handelClear = () => {
         setCategoryID('')
-        set
+        setDuration('')
+        setDurationTerms('')
+        setStartDate('')
+        setEndDate('')
+        setBillAmount('')
+        setBillCycle('')
+        setNote('')
     }
 
 // console.log("Print",categoryList)
@@ -166,7 +172,7 @@ export default function Income(){
                         />   
                     </div><br />
                     <div className="float-container">
-                    <button type="button" className="btn" id="clear-btn" >CLEAR</button>
+                    <button type="button" className="btn" id="clear-btn" onClick={handelClear} >CLEAR</button>
                     <button type="submit" className="btn" id="save-btn">SAVE</button>
                     <button type="button" className="btn" id="edit-btn" >EDIT</button>
                     </div>
