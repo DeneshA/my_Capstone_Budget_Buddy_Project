@@ -10,12 +10,13 @@ function App() {
 
   return (
     < div className='App-container'>
-      <Header />
+     
+      {/* <login>{ ?  <Main /> :  }</lonign> */}
       <div className='main-wrap-container'>
       <Main />
       </div>
       
-      <Footer />
+     
     </div>
   )
 }
