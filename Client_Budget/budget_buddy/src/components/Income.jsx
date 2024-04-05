@@ -5,6 +5,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
 import '../styles/Income.css'
+import { Await } from "react-router-dom";
+
+// const BASE_URL = process.env.REACT__APP_BASE_URL
+// console.log(BASE_URL)
+const BASE_URL = (component,value) => { return `http://localhost:8000/${component}/${value}/` }
+// console.log(BASE_URL('users',12))
 
 export default function Income(){
     const [incomeID,setIncomeID] = useState('')
@@ -50,7 +56,7 @@ export default function Income(){
                 console.log(response.data)
                 setIncomeList(response.data)
                 console.log(incomelist)                
-                handleClear()
+                handelClear()
                 // fetchCategoryList()
 
                 // /Hardcoding UserID
@@ -79,13 +85,60 @@ export default function Income(){
         setNote('')
     }
 
-// console.log("Print",categoryList)
+    const handelSubmit = async (e) => {
+
+        e.preventDefault()
+        if(durationTerms ==='None'){
+            setAlertMessage('Select a duration terms')
+            setAlertType('error')            
+        } else if(billCycle === 'None'){
+            setAlertMessage('Select a bill cycle')
+            setAlertType('error')
+        }
+        try{
+            const response = await axios.post('http://localhost:8000/income/',
+            {
+                user_id : BASE_URL('users',userID),
+                category_id : BASE_URL('category', categoryID),
+                duration : duration,
+                duration_terms : durationTerms,
+                start_date : startDate,
+                end_date : endDate,
+                bill_amount : billAmount,
+                bill_cycle : billCycle,
+                note : note
+            }, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+            })
+            if (response.data) {
+                console.log(response.data)
+                setAlertMessage('Saved successfully Saved')
+                setAlertType('success')
+                fetchData()
+                handelClear()
+            } else {                
+                setAlertMessage('Unable to save Income')
+                setAlertType('error')
+            }
+            
+            // console.log(response.data)
+        } catch (error) {
+            console.error('There was an error!', error.response ? error.response.data : error.message)
+            setAlertMessage('Unable to process save operation')
+            setAlertType('error')
+        }
+        handleAlertTimer()
+    }
+
+
     return(
         <div className="main-container">
             <div className="chart-container"></div>
             <div className="income-container">
-                <h3>INCOME DETAILS</h3>
-                <form >
+                <h3>SETUP INCOME</h3>
+                <form onSubmit={handelSubmit}>
                     <div className="float-containers">
                         <label  htmlFor="Category Name">Category Name</label><br />
                         <select name="category_name"

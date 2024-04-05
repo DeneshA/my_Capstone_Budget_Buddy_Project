@@ -7,7 +7,8 @@ import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
-
+  // const BASE_URL = process.env.REACT__APP_BASE_URL
+  // console.log(BASE_URL)
   return (
     < div className='App-container'>
      
