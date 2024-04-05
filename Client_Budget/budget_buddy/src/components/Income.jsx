@@ -52,6 +52,9 @@ export default function Income(){
                 console.log(incomelist)                
                 handleClear()
                 // fetchCategoryList()
+
+                // /Hardcoding UserID
+                setUserID(1)
                 
             })
             .catch(error => {
@@ -64,12 +67,18 @@ export default function Income(){
         fetchData()
         fetchCategoryList()
     },[])
+
+    const handelClear = () => {
+        setCategoryID('')
+        set
+    }
+
 // console.log("Print",categoryList)
     return(
         <div className="main-container">
             <div className="chart-container"></div>
             <div className="income-container">
-                <h3>INCOME DETAILES</h3>
+                <h3>INCOME DETAILS</h3>
                 <form >
                     <div className="float-containers">
                         <label  htmlFor="Category Name">Category Name</label><br />
