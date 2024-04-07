@@ -1,8 +1,12 @@
 import axios from "axios";
 import { useState,useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+
+import {Link} from 'react-router-dom'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { faList } from '@fortawesome/free-solid-svg-icons';
+import { faLayerGroup } from '@fortawesome/free-solid-svg-icons';
 
 import '../styles/Income.css'
 import { Await } from "react-router-dom";
@@ -13,7 +17,8 @@ const BASE_URL = (component,value) => { return `http://localhost:8000/${componen
 // console.log(BASE_URL('users',12))
 
 export default function SetupIncome(){
-    const [incomeID,setIncomeID] = useState('')
+
+    // const [incomeID,setIncomeID] = useState('')
     const [userID,setUserID] = useState('')
     const [categoryID,setCategoryID]= useState('')
     const [duration,setDuration] = useState('')
@@ -30,7 +35,9 @@ export default function SetupIncome(){
     const [alertMessage,setAlertMessage] = useState('')
     const [alertType, setAlertType] = useState('')
 
-     
+    const {incomeID} = useParams()
+    const navigate = useNavigate()
+    
     //Setting timeout to clear the Alert MSG
     const handleAlertTimer = () => {
         setTimeout( () => {
@@ -69,10 +76,35 @@ export default function SetupIncome(){
                 handleAlertTimer()
             })
     }
+
+    const fetchExistingIncomeData = (incomeID) => {
+        axios.get(`http://localhost:8000/setupincome/${incomeID}`)
+            .then(response => {
+                console.log(response.data)
+                //setIncomeList(response.data)
+                // console.log(incomelist)                
+                handelClear()
+                // fetchCategoryList()
+
+                // /Hardcoding UserID
+                setUserID(1)
+                
+            })
+            .catch(error => {
+                setAlertMessage("Error Unable to fetch income records : " + (error.response ? error.response.data : error.message))
+                setAlertType("error")
+                handleAlertTimer()
+            })
+    }
+
+
     useEffect(() => {
+        // console.log(incomeID)
         fetchData()
         fetchCategoryList()
-    },[])
+        fetchExistingIncomeData(incomeID)
+        console.log(incomeID)
+    },[incomeID])
 
     const handelClear = () => {
         setCategoryID('')
@@ -132,6 +164,14 @@ export default function SetupIncome(){
         handleAlertTimer()
     }
 
+    const handleNavigation = (e) => {
+        e.preventDefault()
+        if(e.target.value === 'list')
+            { navigate('/incomelist')}
+        else {
+            navigate('/incomechart')
+        }
+    }
 
     return(
         <div className="main-container">
@@ -224,10 +264,13 @@ export default function SetupIncome(){
                                 onChange={e => setNote(e.target.value)}                        
                         />   
                     </div><br />
-                    <div className="float-container">
-                    <button type="button" className="btn" id="clear-btn" onClick={handelClear} >CLEAR</button>
-                    <button type="submit" className="btn" id="save-btn">SAVE</button>
-                    <button type="button" className="btn" id="edit-btn" >EDIT</button>
+                    <div className="float-container btn-container">
+                        <div><button type="button" className="btn" id="income-chart-btn" value={'chart'} onClick={handleNavigation}>Chart</button></div>
+                    <div><button type="button" className="btn" id="clear-btn" onClick={handelClear} >CLEAR</button></div>
+                    <div><button type="submit" className="btn" id="save-btn">SAVE</button></div>
+                    <div><button type="button" className="btn" id="edit-btn" >EDIT</button></div>
+                    <div><button type="button" className="btn" id="income-list-btn" value={'list'} onClick={handleNavigation}>List</button></div>
+                        {/* <div className="nav-income-list btn-link"><FontAwesomeIcon icon={faList} size="2xl" style={{color: "#f8f7f7",}} /><br></br><Link to='/incomelist'/>Income List</div> */}
                     </div>
 
                     <div className="alert-container">

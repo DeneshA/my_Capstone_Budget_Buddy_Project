@@ -3,24 +3,33 @@ import Category from './Category'
 import Income from './Income'
 import Header from './Header'
 import Footer from './Footer'
+import SetupIncome from './SetupIncome'
+import Home from './Home'
+import IncomeList from './IncomeList'
+import IncomeChart from './IncomeChart'
 
 
 export default function Main() {
     return (
         <div>
-            {/* <h1>I am Main</h1> */}
-            <Header />
+            
             <div>
                 {/* <Category /> */}
-                <Income />
-                {/* <Routes>
-            {/* <Route path='/' exact element={<Home />}></Route> */}
-                {/* <Route path='/category' element={<Category />}></Route>
-            <Route path='/income' element={<Income/>}></Route> */}
-                {/* </Routes> */}
+                {/* <Income /> */}
+                {/* <SetupIncome /> */}
+                <Routes>
+                    {/* <Route path='/' exact element={<Home />}></Route> */}
+                    <Route path='/' exact element={<Home />}></Route>
+                    <Route path='/category' element={<Category />}></Route>
+                    <Route path='/incomelist' element={<IncomeList />}></Route>
+                    {/* <Route path='/income/:incomeId?' element={<Income />}></Route> */}
+                    <Route path='/incomechart' element={<IncomeChart />}></Route>
+                    <Route path='/setupincome' element={<SetupIncome />}></Route>
+                    <Route path='/setupincome/:incomeId?' element={<SetupIncome />}></Route>
+                </Routes>
 
             </div>
-            <Footer />
+           
         </div>
     )
 }

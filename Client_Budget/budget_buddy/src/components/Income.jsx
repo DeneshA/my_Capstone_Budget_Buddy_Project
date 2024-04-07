@@ -4,7 +4,7 @@ import IncomeChart from './IncomeChart'
 import SetupIncome from './SetupIncome'
 import IncomeList from './IncomeList'
 
-import '../styles/Income.css'
+import '../styles/Template.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
