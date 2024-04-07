@@ -1,8 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
 import Category from './Category'
-import Income from './Income'
-import Header from './Header'
-import Footer from './Footer'
 import SetupIncome from './SetupIncome'
 import Home from './Home'
 import IncomeList from './IncomeList'
@@ -14,15 +11,12 @@ export default function Main() {
         <div>
             
             <div>
-                {/* <Category /> */}
-                {/* <Income /> */}
-                {/* <SetupIncome /> */}
                 <Routes>
                     {/* <Route path='/' exact element={<Home />}></Route> */}
                     <Route path='/' exact element={<Home />}></Route>
                     <Route path='/category' element={<Category />}></Route>
                     <Route path='/incomelist' element={<IncomeList />}></Route>
-                    {/* <Route path='/income/:incomeId?' element={<Income />}></Route> */}
+                    {/* <Route path='/income/:userId?' element={<Income />}></Route> */}
                     <Route path='/incomechart' element={<IncomeChart />}></Route>
                     <Route path='/setupincome' element={<SetupIncome />}></Route>
                     <Route path='/setupincome/:incomeId?' element={<SetupIncome />}></Route>
