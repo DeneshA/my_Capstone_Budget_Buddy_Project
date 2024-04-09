@@ -9,20 +9,21 @@ import  '../styles/Income.css'
 
 import IncomeBarchar from './IncomeBarChart'
 
-export default function IncomeChart() {
+export default function ExpenseChart() {
 
-  const [incomeList, setIncomeList] = useState([])
-  const [data, setData] = useState([])
-  const [dataBarChart, setDataBarChart] = useState([])
-  const [userID,setUserID] = useState('')
+const [expenselist, setExpenseList] = useState([])
+const [data, setData] = useState([])
+const [dataBarChart, setDataBarChart] = useState([])
+const [userID,setUserID] = useState('')
 
   const navigate = useNavigate()
 
   useEffect(() => {
     setUserID(1)
-    axios.get('http://localhost:8000/income/')
+    axios.get('http://localhost:8000/expense/')
       .then(response => {
-        setIncomeList(response.data)
+        setExpenseList(response.data)
+        console.log(expenselist)
       })
       .catch(error => {
        
@@ -31,37 +32,38 @@ export default function IncomeChart() {
   }, [])
 
   useEffect(() => {
-    setUserID(`http://localhost:8000/users/${2}/`)
+    setUserID(`http://localhost:8000/users/${1}/`)
     // Only convert budget when incomeList is updated and not empty
-    if (incomeList.length > 0) {
-      const newData = incomeList.map(income => {
+    if (expenselist.length > 0) {
+      const newData = expenselist.map(expense => {
         let value
-        console.log(income.user_id)
-        if(income.user_id === userID){
+        console.log(expense.user_id)
+        if(expense.user_id === userID){
           
-        switch (income.bill_cycle) {
+        switch (expense.bill_cycle) {
           case "Annually":
-            value = income.bill_amount / 12
+            value = expense.bill_amount / 12
             
             break
           case "Bi-Weekly":
-            value = income.bill_amount * 2
+            value = expense.bill_amount * 2
             break
           case "Weekly":
-            value = income.bill_amount * 4
+            value = expense.bill_amount * 4
             break
           case "Daily":
-            value = income.bill_amount * 30
+            value = expense.bill_amount * 30
             break
           case "Monthly":
           default:
-            value = income.bill_amount
+            value = expense.bill_amount
         }
-        return { name: income.category_name, value }
+        return { name: expense.category_name, value }
     }})
       setData(newData)
+      console.log(data)
     }
-  }, [incomeList])
+  }, [expenselist])
 
  
   // const data = [
@@ -90,16 +92,16 @@ export default function IncomeChart() {
   const handleNavigation = (e) => {
     e.preventDefault()
     if(e.target.value === 'list')
-        { navigate('/incomelist')}
+        { navigate('/expenselist')}
     else {
-        navigate('/setupincome')
+        navigate('/setupexpense')
     }
 }
 
   return (
-    <div className="income-container main-container">
+    <div className="expense-container main-container">
       <div className='pie-chart-container'>
-        <h2>Monthly Average Incomes</h2>
+        <h2>Monthly Average Expenses</h2>
       <PieChart width={250} height={250}>
         <Pie
           data={data}
@@ -117,14 +119,11 @@ export default function IncomeChart() {
         </Pie>
         <Tooltip />
       </PieChart>
-      <div><button type="button" className="btn" id="income-list-btn" value={'list'} onClick={handleNavigation}>List</button></div>
-      <div><button type="button" className="btn" id="setup-income" value={'setup'} onClick={handleNavigation}>Setup</button></div>
+      <div><button type="button" className="btn" id="expense-list-btn" value={'list'} onClick={handleNavigation}>List</button></div>
+      <div><button type="button" className="btn" id="setup-expense" value={'setup'} onClick={handleNavigation}>Setup</button></div>
       </div>
 
-      {/* <div className='bar-chart-income'>
-            <h3>Bar Chart</h3>
-        <IncomeBarchar />
-      </div> */}
+      
     </div>
   )
 }

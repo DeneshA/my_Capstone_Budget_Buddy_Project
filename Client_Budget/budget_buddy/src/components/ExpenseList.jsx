@@ -9,11 +9,11 @@ import { faPenSquare } from '@fortawesome/free-solid-svg-icons';
 
 import '../styles/Income.css'
 
-export default function IncomeList() {
+export default function ExpenseList() {
 
     const navigate = useNavigate()
 
-    const [incomeList, setIncomeList] = useState([])
+    const [expenseList, setExpenseList] = useState([])
     const [alertMessage, setAlertMessage] = useState('')
     const [alertType, setAlertType] = useState('')
 
@@ -29,11 +29,11 @@ export default function IncomeList() {
 
      useEffect(() => {
 
-        const fetchIncomeList = async () => {
-            await axios.get('http://localhost:8000/income/')
+        const fetchExpenseList = async () => {
+            await axios.get('http://localhost:8000/expense/')
                 .then(response => {
                     // console.log("tttttt", response.data)
-                    setIncomeList(response.data)
+                    setExpenseList(response.data)
                     // console.log("Income Test ", incomeList)
                 })
                 .catch(error => {
@@ -41,30 +41,30 @@ export default function IncomeList() {
                     setAlertType("error")
                 })
         }
-        fetchIncomeList()
+        fetchExpenseList()
 
-    }, [incomeList])
+    }, [expenseList])
 
-    const handleUpdate = (incomeId) => {
-        console.log("Pick ",incomeId)
-        navigate(`/setupincome/${incomeId}`)
+    const handleUpdate = (expenseId) => {
+        console.log("Pick ",expenseId)
+        navigate(`/setupexpense/${expenseId}`)
         // navigate(`/income/${incomeId}`)
     }
 
-    const handleDelete = (incomeId) => {
+    const handleDelete = (expenseId) => {
         // have change from Category to Income
-        axios.delete(`http://localhost:8000/income/${incomeId}/`) 
+        axios.delete(`http://localhost:8000/expense/${expenseId}/`) 
             .then(() => {
                 //Removing Income record which was deleted 
-                const updateIncomeList = incomeList.filter(income => income.id !== incomeId)
-                setIncomeList(updateIncomeList)
-                setAlertMessage('Income deleted successfully')
+                const updateExpenseList = expenseList.filter(expense => expense.id !== expenseId)
+                setExpenseList(updateExpenseList)
+                setAlertMessage('Expense deleted successfully')
                 setAlertType('success')
                 // fetchInData()
             })
             .catch(error => {
-                console.error("Error deleting the category : ", error.response ? error.response.data : error.message)
-                setAlertMessage('Failed to detele category !')
+                console.error("Error deleting the expense : ", error.response ? error.response.data : error.message)
+                setAlertMessage('Failed to detele expense !')
                 setAlertType('error')
             })
         handleAlertTimer()
@@ -73,15 +73,15 @@ export default function IncomeList() {
     const handleNavigation = (e) => {
         e.preventDefault()
         if(e.target.value === 'chart')
-            { navigate('/incomechart')}
+            { navigate('/expensechart')}
         else {
-            navigate('/setupincome')
+            navigate('/setupexpense')
         }
     }
 
     return (
-        <div className="income-container">
-            {/* <h1>Iam Income List</h1> */}
+        <div className="expense-container">
+            {/* <h1>Iam expense List</h1> */}
             
             <div className="list-display">
                 <table className="table-list">
@@ -92,6 +92,7 @@ export default function IncomeList() {
                             <th>TERMS</th>
                             <th>START DATE</th>
                             <th>END DATE</th>
+                            <th>BILL DATE</th>
                             <th>BILL AMOUNT</th>
                             <th>Bill CYCLE</th>
                             <th></th>
@@ -99,21 +100,22 @@ export default function IncomeList() {
                     </thead>
                     <tbody>
                         {
-                            incomeList.map((income, index) => (
+                            expenseList.map((expense, index) => (
                                 <tr key={index}>
-                                    {/* {console.log(income.duration)} */}
-                                    <td>{income.category_name}</td>
-                                    <td>{income.duration}</td>
-                                    <td>{income.duration_terms}</td>
-                                    <td>{income.start_date}</td>
-                                    <td>{income.end_date || 'N/A'}</td>
-                                    <td>{income.bill_amount}</td>
-                                    <td>{income.bill_cycle}</td>
+                                    {/* {console.log(expense.duration)} */}
+                                    <td>{expense.category_name}</td>
+                                    <td>{expense.duration}</td>
+                                    <td>{expense.duration_terms}</td>
+                                    <td>{expense.start_date}</td>
+                                    <td>{expense.end_date || 'N/A'}</td>
+                                    <td>{expense.bill_date || 'N/A'}</td>
+                                    <td>{expense.bill_amount}</td>
+                                    <td>{expense.bill_cycle}</td>
                                     <td>
                                         <div className="modify-btn">
-                                            <div className="delete-category" onClick={() => handleDelete(income.id)}><FontAwesomeIcon icon={faTrashCan} /></div>
+                                            <div className="delete-category" onClick={() => handleDelete(expense.id)}><FontAwesomeIcon icon={faTrashCan} /></div>
                                             {/* <div className="edit-category" onClick={() => handleUpdate(income.id)}><FontAwesomeIcon icon={faPenSquare} /></div> */}
-                                            <Link to={`/setupincome/${income.id}`}><FontAwesomeIcon icon={faPenSquare} /></Link>
+                                            <Link to={`/setupexpense/${expense.id}`}><FontAwesomeIcon icon={faPenSquare} /></Link>
                                         </div>
                                     </td>
                                 </tr>
@@ -122,8 +124,8 @@ export default function IncomeList() {
                     </tbody>
                 </table>
                 <div className="buttons-container">
-            <button type="button" className="btn" id="income-list-btn" value={'chart'} onClick={handleNavigation}>Chart</button>
-            <button type="button" className="btn" id="setup-income" value={'setup'} onClick={handleNavigation}>Setup</button>
+            <button type="button" className="btn" id="expense-list-btn" value={'chart'} onClick={handleNavigation}>Chart</button>
+            <button type="button" className="btn" id="setup-expense" value={'setup'} onClick={handleNavigation}>Setup</button>
     
             </div>
             </div>

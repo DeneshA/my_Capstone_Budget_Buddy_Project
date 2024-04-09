@@ -1,6 +1,6 @@
 from rest_framework import generics
-from .serializers import CategorySerializer,IncomeSerializer,UserSerializer
-from .models import Category,Income
+from .serializers import CategorySerializer,IncomeSerializer,UserSerializer,ExpenseSerializer
+from .models import Category,Income,Expense
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from rest_framework import viewsets
@@ -22,6 +22,15 @@ class IncomeList(generics.ListCreateAPIView):
 class IncomeDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Income.objects.all()
     serializer_class = IncomeSerializer
+
+   
+class ExpenseList(generics.ListCreateAPIView):
+    queryset = Expense.objects.all()
+    serializer_class = ExpenseSerializer
+    
+class ExpenseDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Expense.objects.all()
+    serializer_class = ExpenseSerializer
     
 class UserViewSet (viewsets.ReadOnlyModelViewSet):
     # permission_classes = [permissions.IsAuthenticated]

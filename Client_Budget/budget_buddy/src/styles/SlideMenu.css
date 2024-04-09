@@ -1,4 +1,4 @@
-:root {
+ :root {
   --primary-green: #4CAF50; /* A vibrant green */
   --dark-green: #388E3C; /* A darker shade for contrasts or hover effects */
   --light-green: #C8E6C9; /* A light green for backgrounds or accents */
@@ -83,4 +83,4 @@ body {
     color: white;
     font-size: 24px;
     cursor: pointer;
-  }
+  } 
