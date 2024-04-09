@@ -8,6 +8,7 @@ import Expense from './Expense'
 import SetupExpense from './SetupExpense'
 import ExpenseChart from './ExpenseChart'
 import ExpenseList from './ExpenseList'
+import Reminder from './Reminder'
 // import React, {useState,useEffect} from 'react'
 // import axios from 'axios'
 
@@ -31,6 +32,7 @@ export default function Main() {
                     <Route path='/setupexpense/:expenseId' element={<SetupExpense />}></Route>
                     <Route path='/expensechart' element={<ExpenseChart />}></Route>
                     <Route path='/expenselist' element={<ExpenseList />}></Route>
+                    <Route path='/reminder' element={<Reminder />}></Route>
                     {/* <Route path='/expense/:expenseId' element={<Expense />}></Route> */}
                 </Routes>
 

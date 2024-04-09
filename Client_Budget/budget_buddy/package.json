@@ -2,7 +2,7 @@
   "name": "budget_buddy",
   "private": true,
   "version": "0.0.0",
-  "proxy":"http://localhost:8080/",
+  "proxy": "http://localhost:8080/",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -12,6 +12,9 @@
   },
   "dependencies": {
     "@fortawesome/free-regular-svg-icons": "^6.5.2",
+    "@fullcalendar/interaction": "^6.1.11",
+    "@fullcalendar/react": "^6.1.11",
+    "@fullcalendar/timegrid": "^6.1.11",
     "cors": "^2.8.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
