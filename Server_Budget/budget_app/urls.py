@@ -10,5 +10,7 @@ urlpatterns = [
     path('category/<int:pk>/',views.CategoryDetail.as_view(),name='category-detail'),   
     path('income/',views.IncomeList.as_view(), name='income-list'),
     path('income/<int:pk>/',views.IncomeDetail.as_view(),name='income-detail'),
+    path('expense/',views.ExpenseList.as_view(),name='expense-list'),
+    path('expense/<int:pk>/',views.ExpenseDetail.as_view(),name='expense-detail'),
     # path('users/<int:pk>/', views.UserViewSet.as_view(), name='user-detail')
 ]

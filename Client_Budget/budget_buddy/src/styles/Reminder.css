@@ -1,0 +1,26 @@
+:root {
+    --primary-green: #4CAF50; /* A vibrant green */
+    --dark-green: #388E3C; /* A darker shade for contrasts or hover effects */
+    --light-green: #C8E6C9; /* A light green for backgrounds or accents */
+    --error-red: #f44336; /* Keeping the error color as it is essential for UX */
+  }
+  
+  body, html {
+    margin: 10px;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--light-green); /* Light background for the whole page */
+  }
+
+.reminder-container{
+    display: flex;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px black;
+    background-color: white;
+    max-width: 800px; 
+    height: 550px; 
+    width: auto;
+    
+  }
