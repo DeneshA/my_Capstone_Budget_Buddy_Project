@@ -16,30 +16,29 @@ import '../styles/Income.css'
 const BASE_URL = (component,value) => { return `http://localhost:8000/${component}/${value}/` }
 // console.log(BASE_URL('users',12))
 
-export default function SetupIncome(){
+export default function SetupExpense(){
 
-    const [incomeID,setIncomeID] = useState('')
-    const [userID,setUserID] = useState('')
-    const [categoryID,setCategoryID]= useState('')
-    const [duration,setDuration] = useState('')
-    const [durationTerms,setDurationTerms] = useState('')
-    const [startDate,setStartDate] = useState('')
-    const [endDate,setEndDate] = useState('')
-    const [billAmount,setBillAmount] = useState('')
-    const [billCycle,setBillCycle] = useState('')
-    const [note,setNote] = useState('')
+    const [expenseID, setExpenseID] = useState('')
+    const [userID, setUserID] = useState('')
+    const [categoryID, setCategoryID] = useState('')
+    const [duration, setDuration] = useState('')
+    const [durationTerms, setDurationTerms] = useState('')
+    const [startDate, setStartDate] = useState('')
+    const [endDate, setEndDate] = useState('')
+    const [billDate, setBillDate] = useState('')
+    const [billAmount, setBillAmount] = useState('')
+    const [billCycle, setBillCycle] = useState('')
+    const [note, setNote] = useState('')
 
-    const [incomelist, setIncomeList] = useState([])
+    const [expenselist, setExpenseList] = useState([])
     const [categoryList,setCategoryList] = useState([])
 
     const [alertMessage,setAlertMessage] = useState('')
     const [alertType, setAlertType] = useState('')
 
     // const [paramID,setParamID] = useState('')
-    let {incomeId} = useParams()
-    // setIncomeID(incomeId)
-    // setParamID(incomeID)
-    console.log("Income Id  is ",incomeId)
+    let {expenseId} = useParams()
+    console.log("expense Id  is ",expenseId)
     const navigate = useNavigate()
     
     //Setting timeout to clear the Alert MSG
@@ -61,29 +60,29 @@ export default function SetupIncome(){
                 handleAlertTimer()
             })
     }
-    const fetchData = () => {
-        axios.get('http://localhost:8000/income/')
-            .then(response => {
-                // console.log(response.data)
-                setIncomeList(response.data)
-                // console.log(incomelist)                
-                handelClear()
-                // fetchCategoryList()
+    // const fetchData = () => {
+    //     axios.get('http://localhost:8000/expense/')
+    //         .then(response => {
+    //             // console.log(response.data)
+    //             setExpenseList(response.data)
+    //             // console.log(incomelist)                
+    //             handelClear()
+    //             // fetchCategoryList()
 
-                // /Hardcoding UserID
-                setUserID(1)
+    //             // /Hardcoding UserID
+    //             setUserID(1)
                 
-            })
-            .catch(error => {
-                setAlertMessage("Error Unable to fetch income records : " + (error.response ? error.response.data : error.message))
-                setAlertType("error")
-                handleAlertTimer()
-            })
-    }
+    //         })
+    //         .catch(error => {
+    //             setAlertMessage("Error Unable to fetch expense records : " + (error.response ? error.response.data : error.message))
+    //             setAlertType("error")
+    //             handleAlertTimer()
+    //         })
+    // }
 
-    const fetchExistingIncomeData = (incomeId) => {
+    const fetchExistingExpenseData = (expenseId) => {
   
-        axios.get(`http://localhost:8000/income/${incomeId}`)
+        axios.get(`http://localhost:8000/expense/${expenseId}`)
             .then(response => {
                 console.log("Fetch data ",response.data)
                 const data = response.data;
@@ -92,26 +91,23 @@ export default function SetupIncome(){
                 const userId = data.user_id.split('/').filter(Boolean).pop(); // '2'
                 const categoryId = data.category_id.split('/').filter(Boolean).pop(); // '2'
         
-                setIncomeID(data.id);
-                setUserID(userId);
-                setCategoryID(categoryId);
-                setDuration(data.duration.toString()); // Ensure this is a string if your input expects one
-                setDurationTerms(data.duration_terms);
-                setStartDate(data.start_date);
-                setEndDate(data.end_date || ''); // Handle null values
-                setBillAmount(data.bill_amount.toString()); // Ensure this is a string if your input expects one
-                setBillCycle(data.bill_cycle);
-                setNote(data.notes || ''); // Handle empty string
+                setExpenseID(data.id)
+                setUserID(userId)
+                setCategoryID(categoryId)
+                setDuration(data.duration.toString())
+                setDurationTerms(data.duration_terms)
+                setStartDate(data.start_date)
+                setEndDate(data.end_date || '')
+                setBillDate(data.bill_date || '')
+                setBillAmount(data.bill_amount.toString())
+                setBillCycle(data.bill_cycle)
+                setNote(data.notes || '')
                             
-                // handelClear()
-                // fetchCategoryList()
-
-                // /Hardcoding UserID
-                // setUserID(1)
+              
                 
             })
             .catch(error => {
-                setAlertMessage("Error Unable to fetch income records : " + (error.response ? error.response.data : error.message))
+                setAlertMessage("Error Unable to fetch expense records : " + (error.response ? error.response.data : error.message))
                 setAlertType("error")
                 handleAlertTimer()
             })
@@ -123,12 +119,12 @@ export default function SetupIncome(){
        
         // fetchData()
         fetchCategoryList()
-        fetchExistingIncomeData(incomeId)
+        fetchExistingExpenseData(expenseId)
         // console.log(incomeID)
 
         
 
-    },[incomeId])
+    },[expenseId])
 
     const handelClear = () => {
         setCategoryID('')
@@ -136,10 +132,12 @@ export default function SetupIncome(){
         setDurationTerms('')
         setStartDate('')
         setEndDate('')
+        setBillDate('')
         setBillAmount('')
         setBillCycle('')
         setNote('')
     }
+
     const formatDate = (date) => {
         const d = new Date(date)
         let month = '' + (d.getMonth() + 1),
@@ -168,8 +166,8 @@ export default function SetupIncome(){
             setAlertType('error')
         }
         try{
-            if(incomeID){        
-                const responseEdit = await axios.put(`http://localhost:8000/income/${incomeID}/`,
+            if(expenseID){        
+                const responseEdit = await axios.put(`http://localhost:8000/expense/${expenseID}/`,
                 {
                     user_id: BASE_URL('users',userID),
                     category_id: BASE_URL('category',categoryID),
@@ -177,9 +175,10 @@ export default function SetupIncome(){
                     duration_terms : durationTerms,
                     start_date : startDate ? formatDate(startDate) : '',
                     end_date : endDate ? formatDate(endDate) : '',
+                    bill_date : endDate ? formatDate(billDate) : '',
                     bill_amount : billAmount,
                     bill_cycle : billCycle,
-                    note : note
+                    notes : note
                 }, {
                         headers: {
                             'Content-Type': 'application/json',
@@ -187,40 +186,41 @@ export default function SetupIncome(){
                 })
                 if (responseEdit.data) {
                     // console.log(response.data)
-                    setAlertMessage('Income successfully Edited')
+                    setAlertMessage('Expense successfully Edited')
                     setAlertType('success')
-                    fetchData()
+                    // fetchData()
                     handelClear()
                 } else {                
-                    setAlertMessage('Unable to edit Income')
+                    setAlertMessage('Unable to edit Expense')
                     setAlertType('error')
                 }
             }
             else{
-            const response = await axios.post('http://localhost:8000/income/',
-            {
-                user_id : BASE_URL('users',userID),
-                category_id : BASE_URL('category', categoryID),
-                duration : duration,
-                duration_terms : durationTerms,
-                start_date : startDate,
-                end_date : endDate,
-                bill_amount : billAmount,
-                bill_cycle : billCycle,
-                note : note
-            }, {
+            const response = await axios.post('http://localhost:8000/expense/',
+                {
+                    user_id: BASE_URL('users', userID),
+                    category_id: BASE_URL('category', categoryID),
+                    duration: duration,
+                    duration_terms: durationTerms,
+                    start_date: startDate,
+                    end_date: endDate,
+                    bill_date: billDate,
+                    bill_amount: billAmount,
+                    bill_cycle: billCycle,
+                    notes: note
+                }, {
                     headers: {
                         'Content-Type': 'application/json',
                     }
             })
             if (response.data) {
                 // console.log(response.data)
-                setAlertMessage('Saved successfully Saved')
+                setAlertMessage('Expense successfully Saved')
                 setAlertType('success')
                 fetchData()
                 handelClear()
             } else {                
-                setAlertMessage('Unable to save Income')
+                setAlertMessage('Unable to save Expense')
                 setAlertType('error')
             }
             }
@@ -237,17 +237,17 @@ export default function SetupIncome(){
     const handleNavigation = (e) => {
         e.preventDefault()
         if(e.target.value === 'list')
-            { navigate('/incomelist')}
+            { navigate('/expenselist')}
         else {
-            navigate('/incomechart')
+            navigate('/expensechart')
         }
     }
 
     return(
         <div className="main-container">
             <div className="chart-container"></div>
-            <div className="income-container">
-                {/* <h3>SETUP INCOME</h3> */}
+            <div className="expense-container">
+                {/* <h3>SETUP EXPENSE</h3> */}
                 <form onSubmit={handelSubmit}>
                     <div className="float-containers">
                         <label  htmlFor="Category Name">Category Name</label><br />
@@ -256,7 +256,7 @@ export default function SetupIncome(){
                                 value={categoryID}
                                 onChange={e => setCategoryID(e.target.value)}>
                                     {categoryList.map((category,index) => (
-                                        (category.category_type === "Income" ? 
+                                        (category.category_type === "Expense" ? 
                                         <option key={index} value={category.id}>{category.category_name}</option> : 
                                         '' )                                                                                
                                     ))}
@@ -301,6 +301,14 @@ export default function SetupIncome(){
                         />   
                     </div>
                     <div className="float-container">
+                        <label htmlFor="bill_Date">Bill Date</label>
+                        <input type="date"
+                            id="billDate"
+                            value={billDate}
+                            onChange={e => setBillDate(e.target.value)}
+                        />
+                    </div>
+                    <div className="float-container">
                         <label  htmlFor="bill_amount">Bill Amount</label>
                         <input  type="text"
                                 placeholder="Bill Amount"
@@ -335,12 +343,12 @@ export default function SetupIncome(){
                         />   
                     </div><br />
                     <div className="float-container btn-container">
-                        <div><button type="button" className="btn" id="income-chart-btn" value={'chart'} onClick={handleNavigation}>Chart</button></div>
+                        <div><button type="button" className="btn" id="expense-chart-btn" value={'chart'} onClick={handleNavigation}>Chart</button></div>
                     <div><button type="button" className="btn" id="clear-btn" onClick={handelClear} >CLEAR</button></div>
                     <div><button type="submit" className="btn" id="save-btn">SAVE</button></div>
                     <div><button type="button" className="btn" id="edit-btn" onClick={handelSubmit}>EDIT</button></div>
-                    <div><button type="button" className="btn" id="income-list-btn" value={'list'} onClick={handleNavigation}>List</button></div>
-                        {/* <div className="nav-income-list btn-link"><FontAwesomeIcon icon={faList} size="2xl" style={{color: "#f8f7f7",}} /><br></br><Link to='/incomelist'/>Income List</div> */}
+                    <div><button type="button" className="btn" id="expense-list-btn" value={'list'} onClick={handleNavigation}>List</button></div>
+                        {/* <div className="nav-expense-list btn-link"><FontAwesomeIcon icon={faList} size="2xl" style={{color: "#f8f7f7",}} /><br></br><Link to='/expenselist'/>expense List</div> */}
                     </div>
 
                     <div className="alert-container">

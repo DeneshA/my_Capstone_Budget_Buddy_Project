@@ -15,7 +15,7 @@ export default function Nav(){
         <div className="nav-bar-icons">
             <div className="home-icon icons"><FontAwesomeIcon icon={faHouse} size="2xl" style={{color: "#f2f5f8",}} /><br></br><Link to='/'>Home</Link></div>
             <div className="home-icon icons"><FontAwesomeIcon icon={faHandHoldingDollar} size="2xl" style={{color: "#f5f7f9",}} /><br></br><Link to='/setupincome'>Income</Link></div>
-            <div className="expense-icon icons"><FontAwesomeIcon icon={faHandHolding} size="2xl" style={{color: "#f2f4f8",}} /><br></br><Link to='/'>Expense</Link></div>
+            <div className="expense-icon icons"><FontAwesomeIcon icon={faHandHolding} size="2xl" style={{color: "#f2f4f8",}} /><br></br><Link to='/setupexpense'>Expense</Link></div>
             <div className="home-icon icons"><FontAwesomeIcon icon={faLayerGroup} size="2xl" style={{color: "#f4f5f6",}} /><br></br><Link to='/category'>Category</Link></div>
             <div className="expense-icon icons"><FontAwesomeIcon icon={faBullseye} size="2xl" style={{color: "#f4f5f6",}} /><br></br><Link to='/'>Goal Planer</Link></div>
             <div className="expense-icon icons"><FontAwesomeIcon icon={faClock} size="2xl" style={{color: "#f2f4f8",}} /><br></br><Link to='/'>Reminder</Link></div>

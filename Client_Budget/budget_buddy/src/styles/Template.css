@@ -11,18 +11,22 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--light-green); /* Light background for the whole page */
   }
+/* .main-container {
+    display: flex;
+    flex-direction: row;
+    } */
   
-  .category-container {
-    margin: 20px auto;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px black;
-    background-color: white;
-    width: 75%;
-    /* max-width: 1200px;  */
-    
-    
-  }
+.income-container{
+  display: flex;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px black;
+  background-color: white;
+  max-width: 800px; /* Ensures container doesn't stretch too much on wider screens */
+  
+}
+
   .category-display{
     overflow-y: hidden;
     scroll-behavior: smooth;
