@@ -54,6 +54,9 @@ MIDDLEWARE = [
 ]
 
 REST_FRAMEWORK={
+    # 'DEFAULT_AUTHENTICATION_CLASSES': (
+    #     'rest_framework_simplejwt.authentication.JWTAuthentication',
+    # ),
     # Use Django's standard `django.contrib.auth` permissions,
     # # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
@@ -72,8 +75,10 @@ CSRF_TRUSTED_ORIGINS = [
     "http://localhost:5173"
 ]
 CORS_ORIGIN_WHITELIST = [
-   'http://127.0.0.1:5173',
+   "http://127.0.0.1:5173",
 ]
+
+CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'budget_django.urls'
 
