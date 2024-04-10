@@ -1,5 +1,8 @@
+
+
 export default function Home (){
+   
     return(
-        <h1>I am Home</h1>
+        <h3>Welcome to Budget Buddy your budget partner</h3>
     )
 }
