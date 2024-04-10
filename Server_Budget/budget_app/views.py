@@ -66,12 +66,16 @@ class RegisterView(APIView):
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
     
 class LoginView(APIView):
-    def post(self,request):
-        username = request.data['username']
-        password = request.data['password']
+    def post(self,request, *args, **kwargs):
+        username = request.data.get('username')
+        password = request.data.get('password')
         
+        if not username:
+        # Handle the case where username is not provided
+            return Response({"error": "Username is required"}, status=status.HTTP_400_BAD_REQUEST)
+    
         user = User.objects.filter(username=username).first()
-        # check if email not exist
+        # check if username not exist
         if user is None:
             raise AuthenticationFailed('User not found!')
         
