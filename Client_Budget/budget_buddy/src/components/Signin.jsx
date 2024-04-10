@@ -2,8 +2,10 @@ import axios from 'axios'
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import '../styles/Signin.css'
 
 export default function Signin() {
+
     const navigation = useNavigate()
 
     const { login } = useAuth()
@@ -16,20 +18,21 @@ export default function Signin() {
         try {
             const response = await axios.post('http://localhost:8000/signin/', {
                 username: userName,
-                password: password,
-            }, {
+                password: password},
+            {
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 withCredentials: true,
             })
             if (response.status === 200) {
-                localStorage.setItem('token', response.data.token)
+                console.log(response.data.jwt)
+                localStorage.setItem('token', response.data.jwt)
                 login()
                 navigation('/')
             }
         } catch (error) {
-            console.error('Error during sign in:', error.response ? error.response.data : error.message);
+            console.error('Error during sign in:', error.response ? error.response.data : error.message)
 
         }
     }
@@ -41,15 +44,15 @@ export default function Signin() {
             </div>
             <form onSubmit={HandleSubmit}>
 
-                <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
+                <h3 className="h3 mb-3 fw-normal">Please sign in</h3>
 
                 <div className="form-floating">
-                    <label htmlFor="floatingInput">User Name</label>
+                    {/* <label htmlFor="floatingInput">User Name</label> */}
                     <input type="text" className="form-control" id="floatingInput" placeholder="User Name" onChange={e => setUserName(e.target.value)} />
 
                 </div>
                 <div className="form-floating">
-                    <label htmlFor="floatingPassword">Password</label>
+                    {/* <label htmlFor="floatingPassword">Password</label> */}
                     <input type="password" className="form-control" id="floatingPassword" placeholder="Password" onChange={e => setPassword(e.target.value)} />
 
                 </div>
@@ -60,7 +63,7 @@ export default function Signin() {
             </form>
 
             <div className="footer-container">
-                <p className="mt-5 mb-3 text-body-secondary">&copy; 2024</p>
+                <p className="mt-5 mb-3 text-body-secondary"> Denesh Anandathasan &copy; 2024 </p>
             </div>
         </div>
     )

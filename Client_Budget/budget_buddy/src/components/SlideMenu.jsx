@@ -2,14 +2,18 @@ import React,{useState,useEffect} from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import axios from 'axios'
 import { useAuth } from '../context/AuthContext'
+import { jwtDecode } from "jwt-decode"
 import '../styles/SlideMenu.css'
 
 export default function SlideMenu() {
     const navigation = useNavigate()
 
-    const { logout } = useAuth()
+    const { logout, setUserID } = useAuth()
 
+    // const [userId, setUserID] = useState('')
     const [userName, setUserName] = useState('')
+    const [userFirstName, setFirstUser] = useState('')
+
 
 
 
@@ -21,60 +25,51 @@ export default function SlideMenu() {
     useEffect(() => {
         const handleOutsideClick = (event) => {
             if (!event.target.closest('.curtain-menu') && isSlideMenuOpen) {
-                setIsSlideMenuOpen(false); // Close the menu if click outside
+                setIsSlideMenuOpen(false)
             }
-        };
+        }
 
         if (isSlideMenuOpen) {
             document.addEventListener('click', handleOutsideClick)
         }
 
         return () => document.removeEventListener('click', handleOutsideClick)
-    }, [isSlideMenuOpen]) // Effect runs on menu state change
+    }, [isSlideMenuOpen]) 
 
    
 
     useEffect(()=> {
         const fetchActiveUserDetails = async () => {
             const token = localStorage.getItem('token')
-            if (token){
-                try {
-                    const response = await axios.get('http://localhost:8000/users/',{
-                        headers:{
-                            'Authorization': `Bearer ${token}`
-                        }
-                    })
-                    if(response.status === 200) {
-                        console.log(response.data)
-                        setUserName(response.data.first_name)
-
-                    }}
-                catch(error){
-                        console.log('Error fetching user details:', error)
-                    }
-                
-            }}
+            console.log("Token -",token)
+            const tokenDecoded = jwtDecode(token)
+            console.log(tokenDecoded)
+          
+            setUserID(tokenDecoded.id)
+            setUserName(tokenDecoded.username)
+            setFirstUser(tokenDecoded.first_name)           
+        }
             fetchActiveUserDetails()
-    },[userName])
+    },[setUserID])
 
 
     const HandleSignout = async (e) => {
         e.preventDefault()
-       // Optional: Invalidate the token on the backend
+      
     try {
         await axios.post('http://localhost:8000/signout/', {}, {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
         })
-        // If the backend call is optional or successful, proceed with logout
+        
     } catch (error) {
         console.error('Error during sign out:', error)
     }
     
-    localStorage.removeItem('token') // Remove the token from local storage
-    logout(); // Update your AuthContext state to reflect the logout
-    navigation('/signin') // Redirect to the sign-in page
+    localStorage.removeItem('token') 
+    logout()
+    navigation('/signin')
     }
 
     return (
@@ -92,7 +87,7 @@ export default function SlideMenu() {
             </div>
 
             <div className="user-section">
-                <span className="user-name">{`WelCome ! ${userName}`}</span>
+                <span className="user-name">{`Welcome ! ${userFirstName}`}</span>
                 <a href="/"  className="logout-link" onClick={HandleSignout}>Logout</a>
             </div>
         </nav>

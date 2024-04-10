@@ -1,4 +1,4 @@
-:root {
+/* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -11,7 +11,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
+} */
 
 a {
   font-weight: 500;
@@ -54,6 +54,7 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -65,4 +66,23 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+/* For tablets and above */
+@media only screen and (min-width: 768px) {
+  .form-floating input {
+      width: 50%; 
+  }
+}
+
+/* For desktops and above */
+@media only screen and (min-width: 992px) {
+  .header-container {
+      padding: 20px 0; 
+
+  .form-floating input {
+      width: 30%; 
+  }
+
+}
 }

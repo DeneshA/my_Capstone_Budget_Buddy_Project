@@ -8,13 +8,21 @@ export function useAuth() {
 
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [userId,setUserId] =useState('')
 
   const login = () => setIsLoggedIn(true)
-  const logout = () => setIsLoggedIn(false)
+  const logout = () =>{ 
+    setIsLoggedIn(false) 
+    setUserId('')}
+
+    // Set up a function to access from slidemenu to push user id to store in context
+    const setUserID = (id) => {
+      setUserId(id)
+    }
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
+    <AuthContext.Provider value={{ isLoggedIn, login, logout, userId, setUserID }}>
       {children}
     </AuthContext.Provider>
-  );
-};
+  )
+}

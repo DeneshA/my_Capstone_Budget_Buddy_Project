@@ -52,7 +52,7 @@ class ExpenseDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ExpenseSerializer
     
 class UserViewSet (viewsets.ReadOnlyModelViewSet):
-    # permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
@@ -88,6 +88,8 @@ class LoginView(APIView):
         # create payload for JWT
         payload = {
             'id': user.id,
+            'username':user.username,
+            'first_name':user.first_name,
             'exp': datetime.now(timezone.utc) + timedelta(minutes=60), #adding 60 min expiaration time
             'iat': datetime.now(timezone.utc) #the time JWT get initiated
         }

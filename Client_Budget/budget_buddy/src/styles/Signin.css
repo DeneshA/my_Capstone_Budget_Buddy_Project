@@ -1,0 +1,116 @@
+:root {
+    --primary-green: #4CAF50; /* A vibrant green */
+    --dark-green: #388E3C; /* A darker shade for contrasts or hover effects */
+    --light-green: #C8E6C9; /* A light green for backgrounds or accents */
+    --error-red: #f44336; /* Keeping the error color as it is essential for UX */
+  }
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--light-green); 
+    font-size: 12px;
+  }
+h3{
+    margin: 40px 5px 10px;
+    color: var(--dark-green);
+}
+.title{
+    font-size: 30px;
+    font-weight: 900;
+    color: white;
+}
+.slogon{
+    font-size: 15px;
+    font-weight: 700;
+    color: white;
+}
+.header-container {
+    border: 2px solid var(--primary-green);
+    background-color: var(--primary-green);
+    width: 100%;
+    margin: 0; /* Resets any margin */
+    padding: 10px 0; /* Adjust padding as needed, but keep it uniform */
+    box-sizing: border-box; /* Includes padding and border in the element's total width and height */
+}
+
+/* Set consistent height and width for text and password inputs */
+.form-floating input[type="text"],
+.form-floating input[type="password"] {
+    height: 20px; /* Example height, adjust as needed */
+    width: 100%; /* Takes the full width of its parent container */
+    padding: 10px;
+    border: 1px solid var(--primary-green);
+    border-radius: 4px;
+    margin-bottom: 5px; /* Ensures spacing between elements */
+    box-sizing: border-box; /* Includes padding and border in the element's total width and height */
+    
+}
+
+.btn {
+  background-color: var(--primary-green);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  /* Space between buttons */
+  margin-right: 10px; 
+  margin-bottom: 2px;
+
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+      color: #213547;
+      background-color: #ffffff;
+    }
+    a:hover {
+      color: #747bff;
+    }
+    button {
+      background-color: #f9f9f9;
+    }
+  }
+  
+  
+
+
+  /* For tablets and above */
+  @media only screen and (min-width: 768px) {
+    .form-floating input {
+        width: 50%; 
+    }
+  }
+  
+  /* For desktops and above */
+  @media only screen and (min-width: 992px) {
+    .header-container {
+        padding: 20px 0; 
+  
+    .form-floating input {
+        width: 30%; 
+    }
+  
+    .title, .slogon {
+        font-size: 22px; 
+    }
+    .slogon {
+      font-size: 18px; 
+  }
+  
+  button{
+    width: 30px;
+    height: auto;
+
+  }
+  /* Small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  button{
+    width: 100%;
+    height: 20px;
+
+  }
+}
+  }
+  }
