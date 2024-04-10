@@ -5,6 +5,8 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 from rest_framework import viewsets
 from rest_framework import permissions
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -98,6 +100,9 @@ class LoginView(APIView):
         
         # set the cookies and display token via cookies
         response.set_cookie(key='jwt', value=token, httponly=True)
+        # This should be used in HTTPS 
+        # response.set_cookie(key='jwt', value=token, httponly=True, secure=True)
+
         
         response.data = {
             'jwt':token
@@ -108,7 +113,12 @@ class LoginView(APIView):
         return response
     
 class UserView(APIView):
+    # Use DRF's built-in permission classes to ensure only authenticated users can access this view
+    permission_classes = [IsAuthenticated]
+    
     def get(self, request):
+        
+        user = request.user
     #get the cooky and extract the User
         #get the cooky to extract user
         token = request.COOKIES.get('jwt')
