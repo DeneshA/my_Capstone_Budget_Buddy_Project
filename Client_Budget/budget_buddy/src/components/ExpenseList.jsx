@@ -1,11 +1,12 @@
 import axios from "axios"
 import React, { useState, useEffect } from "react"
 import { useNavigate , Link} from 'react-router-dom'
+import { jwtDecode } from "jwt-decode"
 
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
-import { faPenSquare } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
+import { faPenSquare } from '@fortawesome/free-solid-svg-icons'
+import { useAuth } from '../context/AuthContext'
 
 import '../styles/Income.css'
 
@@ -16,6 +17,9 @@ export default function ExpenseList() {
     const [expenseList, setExpenseList] = useState([])
     const [alertMessage, setAlertMessage] = useState('')
     const [alertType, setAlertType] = useState('')
+    const [userID,setUserID] = useState('')
+   
+    const {setPageTitle} = useAuth()
 
 
     //Setting timeout to clear the Alert MSG
@@ -28,25 +32,34 @@ export default function ExpenseList() {
     }
 
      useEffect(() => {
-
+      
+        
+        setPageTitle("EXPENSE LIST")
+        const token = localStorage.getItem('token')
+        const tokenDecoded = jwtDecode(token)
+        setUserID(tokenDecoded.id)
         const fetchExpenseList = async () => {
-            await axios.get('http://localhost:8000/expense/')
-                .then(response => {
-                    // console.log("tttttt", response.data)
-                    setExpenseList(response.data)
-                    // console.log("Income Test ", incomeList)
+            try {
+                const response = await axios.get('http://localhost:8000/expense/')
+                const filteredExpenses = response.data.filter(exp => {
+                    // Extracting user ID from the URL
+                    const urlSegments = exp.user_id.split('/')
+                    const expUserID = urlSegments[urlSegments.length - 2]
+                    return expUserID == userID
                 })
-                .catch(error => {
-                    setAlertMessage("Error Unable to fetch records : " + (error.response ? error.response.data : error.message))
-                    setAlertType("error")
-                })
+                setExpenseList(filteredExpenses)
+            } catch (error) {
+                const errorMessage = "Error Unable to fetch records : " + (error.response ? error.response.data : error.message)
+                setAlertMessage(errorMessage)
+                setAlertType("error")
+            }
         }
         fetchExpenseList()
 
     }, [expenseList])
 
     const handleUpdate = (expenseId) => {
-        console.log("Pick ",expenseId)
+        // console.log("Pick ",expenseId)
         navigate(`/setupexpense/${expenseId}`)
         // navigate(`/income/${incomeId}`)
     }

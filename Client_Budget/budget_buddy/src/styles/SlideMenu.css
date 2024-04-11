@@ -1,4 +1,4 @@
- :root {
+:root {
   --primary-green: #4CAF50; /* A vibrant green */
   --dark-green: #388E3C; /* A darker shade for contrasts or hover effects */
   --light-green: #C8E6C9; /* A light green for backgrounds or accents */
@@ -84,3 +84,33 @@ body {
     font-size: 24px;
     cursor: pointer;
   } 
+
+  .page-title-container{
+    font-size: 35px;
+    font-weight: 700;
+  }
+
+  /* Responsive Design */
+  /* Desktops */
+  @media (max-width: 1024px) { 
+    .page-title-container{
+      font-size: 30px;
+      font-weight: 600;
+    }
+  }
+  /* Tablets */
+  @media (max-width: 768px) { 
+    .page-title-container{
+      font-size: 25px;
+      font-weight: 500;
+    }
+  
+  }
+  /* Mobile Phones */
+  @media (max-width: 480px) { 
+    .page-title-container{
+      font-size: 20px;
+      font-weight: 400;
+    }
+}
+  

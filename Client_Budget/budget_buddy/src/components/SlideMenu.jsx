@@ -8,7 +8,7 @@ import '../styles/SlideMenu.css'
 export default function SlideMenu() {
     const navigation = useNavigate()
 
-    const { logout, setUserID } = useAuth()
+    const { logout, setUserID, comTitle} = useAuth()
 
     // const [userId, setUserID] = useState('')
     const [userName, setUserName] = useState('')
@@ -41,9 +41,9 @@ export default function SlideMenu() {
     useEffect(()=> {
         const fetchActiveUserDetails = async () => {
             const token = localStorage.getItem('token')
-            console.log("Token -",token)
+            // console.log("Token -",token)
             const tokenDecoded = jwtDecode(token)
-            console.log(tokenDecoded)
+            // console.log(tokenDecoded)
           
             setUserID(tokenDecoded.id)
             setUserName(tokenDecoded.username)
@@ -75,7 +75,7 @@ export default function SlideMenu() {
     return (
         <nav className="navbar">
             <button className="menu-button" onClick={toogleMenu}>
-                &#9776; {/* Hamburger menu icon */}
+                &#9776; 
             </button>
             <div className={`curtain-menu ${isSlideMenuOpen ? 'open':''}`}>
                 <button className='close-menu' onClick={closeMenu}>&times;</button>
@@ -85,7 +85,7 @@ export default function SlideMenu() {
                 <a href="#">CATEGORY</a>
                 <a href="#">REMINDER</a>
             </div>
-
+            <div className='page-title-container'>{comTitle}</div>
             <div className="user-section">
                 <span className="user-name">{`Welcome ! ${userFirstName}`}</span>
                 <a href="/"  className="logout-link" onClick={HandleSignout}>Logout</a>

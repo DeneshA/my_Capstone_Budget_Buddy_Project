@@ -1,17 +1,16 @@
-/* :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+ :root {
+  --primary-green: #4CAF50; /* A vibrant green */
+  --dark-green: #388E3C; /* A darker shade for contrasts or hover effects */
+  --light-green: #C8E6C9; /* A light green for backgrounds or accents */
+  --error-red: #f44336; /* error color */
+
+  /* font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
-  font-weight: 400;
+  font-weight: 400; */
+  background-color: var(--light-green);
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-} */
+ 
+}
 
 a {
   font-weight: 500;
@@ -23,11 +22,12 @@ a:hover {
 }
 
 body {
-  margin: 0;
+  margin-top: 50px;
   display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: var(--light-green);
 }
 
 h1 {
@@ -54,35 +54,54 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+@media (max-width: 1024px) { 
+  .btn, .form-floating input, .form-floating select {
+    width: 95%; 
   }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
+   .category-container {
+    width: 90%; 
+    height: 800px; 
   }
 }
+/* Tablets */
+@media (max-width: 768px) { 
+  .category-container, .btn {
+    width: 95%; 
+  }
 
-/* For tablets and above */
-@media only screen and (min-width: 768px) {
-  .form-floating input {
-      width: 50%; 
+  .form-floating, .btn {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .category-container {
+  
+    width: 80%; 
+    height: 700px; 
+  }
+  .btn {
+    margin-bottom: 10px; 
   }
 }
+/* Mobile Phones */
+@media (max-width: 480px) { 
+  .form-floating label, .alert, .btn, .form-floating input, .form-floating select {
+    font-size: smaller; 
 
-/* For desktops and above */
-@media only screen and (min-width: 992px) {
-  .header-container {
-      padding: 20px 0; 
-
-  .form-floating input {
-      width: 30%; 
+  .btn {
+    width: 100%; 
+    margin-right: 0; 
   }
-
+.main-container{
+  max-width: 600px;
+}
+  .category-container {
+    margin: 20px;
+    padding: 20px;
+    width: 100%; 
+    min-height: 800px;
+    /* justify-content: center; */
+  }
 }
 }

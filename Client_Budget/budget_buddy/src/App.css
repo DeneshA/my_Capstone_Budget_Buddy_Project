@@ -1,13 +1,14 @@
 #root {
-  --primary-green: #4CAF50; /* A vibrant green */
-  --dark-green: #388E3C; /* A darker shade for contrasts or hover effects */
-  --light-green: #C8E6C9; /* A light green for backgrounds or accents */
-  --error-red: #f44336; /* Keeping the error color as it is essential for UX */
+  --primary-green: #4CAF50; 
+  --dark-green: #388E3C; 
+  --light-green: #C8E6C9; 
+  --error-red: #f44336; 
   
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  color: var(--dark-green);
 }
 
 .App-container {

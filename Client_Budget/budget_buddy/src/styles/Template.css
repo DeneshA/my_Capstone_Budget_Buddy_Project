@@ -27,6 +27,9 @@
   
 }
 
+/* .navbar{
+  height: 100px;
+} */
   .category-display{
     overflow-y: hidden;
     scroll-behavior: smooth;

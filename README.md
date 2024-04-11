@@ -29,3 +29,30 @@ This GitHub project involves the development of a comprehensive full-stack appli
 # Technology Architecture
 
 ![alt text](image-3.png)
+
+# User Stories 
+--# Sign Up: As a user, I want to be able to create a new account on the Budget Buddy platform.
+
+--# Sign In: As a user, I want to be able to log in to my existing account on the Budget Buddy platform.
+
+--# Sign Out: As a user, I want to be able to log out of my account securely when I'm done using the Budget Buddy platform.
+
+--# Manage Income: As a user, I want to be able to create, edit, update, and delete my income records on the Budget Buddy platform.
+
+--# Manage Expenses: As a user, I want to be able to create, edit, update, and delete my expense records on the Budget Buddy platform.
+
+--# View Existing Income and Expenses: As a user, I want to be able to view the list of my existing income and expense records on the Budget Buddy platform.
+
+--# View Monthly Average Income and Expenses: As a user, I want to be able to view the monthly average income and expenses represented in charts on the Budget Buddy platform, categorized based on different bill cycles.
+
+--# View Calendar with Reminders: As a user, I want to be able to view a calendar feature on the Budget Buddy platform that includes reminders for important financial events or deadlines.
+
+# Screenshorts
+
+![alt text](image-6.png)
+![alt text](image-7.png)
+![alt text](image-8.png)
+![alt text](image-9.png)
+![alt text](image-10.png)
+![alt text](image-11.png)
+![alt text](image-12.png)

@@ -1,13 +1,12 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { PieChart, Pie, Tooltip, Cell } from 'recharts';
-import { useNavigate, useParams } from "react-router-dom";
-// import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend, ResponsiveContainer } from 'recharts';
-
-import IncomeList from './IncomeList';
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+import { PieChart, Pie, Tooltip, Cell } from 'recharts'
+import { useNavigate, useParams } from "react-router-dom"
+import { useAuth } from '../context/AuthContext'
+import { jwtDecode } from "jwt-decode"
 import  '../styles/Income.css'
 
-import IncomeBarchar from './IncomeBarChart'
+// import IncomeBarchar from './IncomeBarChart'
 
 export default function ExpenseChart() {
 
@@ -18,12 +17,16 @@ const [userID,setUserID] = useState('')
 
   const navigate = useNavigate()
 
+  const {setPageTitle} = useAuth()
+  
   useEffect(() => {
     setUserID(1)
+   
+    setPageTitle("MONTHLY EXPENSE CHART")
     axios.get('http://localhost:8000/expense/')
       .then(response => {
         setExpenseList(response.data)
-        console.log(expenselist)
+        // console.log(expenselist)
       })
       .catch(error => {
        
@@ -32,7 +35,9 @@ const [userID,setUserID] = useState('')
   }, [])
 
   useEffect(() => {
-    setUserID(`http://localhost:8000/users/${1}/`)
+    const token = localStorage.getItem('token')
+    const tokenDecoded = jwtDecode(token)
+    setUserID(`http://localhost:8000/users/${tokenDecoded.id}/`)
     // Only convert budget when incomeList is updated and not empty
     if (expenselist.length > 0) {
       const newData = expenselist.map(expense => {
@@ -75,13 +80,13 @@ const [userID,setUserID] = useState('')
 
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042','#FF8085',
                   '#FFAA28','#89C49F', '#FTGB28','#FF9575','#FFAA84',
-                  '#81H49F','#0568FE', '#28C49F','#FFBC58'];
+                  '#81H49F','#0568FE', '#28C49F','#FFBC58']
 
-  const RADIAN = Math.PI / 180;
+  const RADIAN = Math.PI / 180
   const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-    const x = cx + radius * Math.cos(-midAngle * RADIAN);
-    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5
+    const x = cx + radius * Math.cos(-midAngle * RADIAN)
+    const y = cy + radius * Math.sin(-midAngle * RADIAN)
     return (
       <text x={x} y={y} fill="black" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
         {`${(percent * 100).toFixed(0)}%`}
@@ -101,7 +106,7 @@ const [userID,setUserID] = useState('')
   return (
     <div className="expense-container main-container">
       <div className='pie-chart-container'>
-        <h2>Monthly Average Expenses</h2>
+        {/* <h2>Monthly Average Expenses</h2> */}
       <PieChart width={250} height={250}>
         <Pie
           data={data}
@@ -119,8 +124,11 @@ const [userID,setUserID] = useState('')
         </Pie>
         <Tooltip />
       </PieChart>
+      <div className='buttons-container'>
       <div><button type="button" className="btn" id="expense-list-btn" value={'list'} onClick={handleNavigation}>List</button></div>
       <div><button type="button" className="btn" id="setup-expense" value={'setup'} onClick={handleNavigation}>Setup</button></div>
+      </div>
+      
       </div>
 
       
