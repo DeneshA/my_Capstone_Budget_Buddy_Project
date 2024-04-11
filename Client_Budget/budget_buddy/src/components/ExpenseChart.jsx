@@ -4,10 +4,10 @@ import { PieChart, Pie, Tooltip, Cell } from 'recharts'
 import { useNavigate, useParams } from "react-router-dom"
 // import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend, ResponsiveContainer } from 'recharts'
 
-import IncomeList from './IncomeList'
+// import IncomeList from './IncomeList'
 import  '../styles/Income.css'
 
-import IncomeBarchar from './IncomeBarChart'
+// import IncomeBarchar from './IncomeBarChart'
 
 export default function ExpenseChart() {
 

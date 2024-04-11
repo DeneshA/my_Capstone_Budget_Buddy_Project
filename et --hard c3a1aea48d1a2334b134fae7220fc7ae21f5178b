@@ -1,0 +1,325 @@
+[33mcommit c3a1aea48d1a2334b134fae7220fc7ae21f5178b[m[33m ([m[1;36mHEAD -> [m[1;32mjwt_auth[m[33m)[m
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Wed Apr 10 20:47:35 2024 -0400
+
+    Refactoring code done 50%
+
+[33mcommit c5952527210f7a0a366a193e7652a0b44a0e5ef8[m[33m ([m[1;31morigin/jwt_auth[m[33m)[m
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Wed Apr 10 16:20:28 2024 -0400
+
+    User log in and Token decode is functioning
+
+[33mcommit 8af10ed404f9f0f336d9b238c4fb92cbd575bf48[m
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Wed Apr 10 11:39:23 2024 -0400
+
+    sign in  resolving taken expireation
+
+[33mcommit 181291dd59af2bc34ef22c8298672874d7248848[m
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Wed Apr 10 10:04:23 2024 -0400
+
+     Sign in successfull
+
+[33mcommit 0f826c0fd6a2233dca344f8afc570a91bf02cb71[m
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Tue Apr 9 22:27:09 2024 -0400
+
+     EOD commit - JWT
+
+[33mcommit 100781855bbb08dceef09df4192e7e9c27e50828[m
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Tue Apr 9 11:09:17 2024 -0400
+
+    Test
+
+[33mcommit 8675a22e3990d6d76d3ffaf3849d53f8b0479d8d[m
+Merge: 4c3277d b0f2d16
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Tue Apr 9 11:09:11 2024 -0400
+
+    Merge branch 'main' into jwt_auth
+
+[33mcommit b0f2d16872565de0845d74df6d03534d31482fd4[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Tue Apr 9 11:07:54 2024 -0400
+
+    test
+
+[33mcommit 00a255e77464c1ceb5e8a0a6545f800182bfeb21[m
+Merge: 148076a fa99c7a
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Tue Apr 9 11:07:42 2024 -0400
+
+    commit chnages after push
+
+[33mcommit 4c3277d11031d9528db02b390a69a910fb172074[m
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Tue Apr 9 11:05:40 2024 -0400
+
+    COmmit supporting file
+
+[33mcommit e6d42fe5936ced2e6f6d227cf7e204298b77a263[m
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Tue Apr 9 11:03:38 2024 -0400
+
+    pull commit
+
+[33mcommit 148076abbc58e5df709090ec9c35c65d4ca73c98[m
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Tue Apr 9 10:11:30 2024 -0400
+
+    commit after pull to local main
+
+[33mcommit fa99c7a01eb8c342a8fa477df1c4dc7b589a99c5[m
+Merge: e83c8ae 842eb15
+Author: Denesh Anandathasan <34461872+DeneshA@users.noreply.github.com>
+Date:   Tue Apr 9 10:09:00 2024 -0400
+
+    Merge pull request #5 from DeneshA/income_branch
+    
+    Morning changer Before push and pull
+
+[33mcommit 842eb1576827c40c46e1ca8b55523625ab6ff39f[m[33m ([m[1;31morigin/income_branch[m[33m)[m
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Tue Apr 9 10:07:19 2024 -0400
+
+    Morning changer Before push and pull
+
+[33mcommit e83c8ae4ca6037ca48a3d54037872d3abbb23286[m
+Merge: cea8f87 f9a6c9e
+Author: Denesh Anandathasan <34461872+DeneshA@users.noreply.github.com>
+Date:   Mon Apr 8 23:24:38 2024 -0400
+
+    Merge pull request #4 from DeneshA/income_branch
+    
+    EOD commiting  Front and back end
+
+[33mcommit f9a6c9e6dbb3e3e5433d632347c91883d3b89811[m
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Mon Apr 8 23:23:14 2024 -0400
+
+    EOD commiting  Front and back end
+
+[33mcommit cea8f87171526b67f241d63f4c20d5df375abce7[m
+Merge: e0b2488 2de3c30
+Author: Denesh Anandathasan <34461872+DeneshA@users.noreply.github.com>
+Date:   Sat Apr 6 23:17:30 2024 -0400
+
+    Merge pull request #3 from DeneshA/income_branch
+    
+    Income branch
+
+[33mcommit 2de3c30e2cba31b08d64ece17b88a974479c45e1[m
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Sat Apr 6 23:17:04 2024 -0400
+
+    EOD commit
+
+[33mcommit 21bfb0ee613530bdae84f1148dcd707ef7bdd8f8[m
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Sat Apr 6 23:10:45 2024 -0400
+
+    commit push EOD
+
+[33mcommit dd5b60a5dc5a8302d48698cbf6884790f2a9a8d9[m
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Sat Apr 6 12:50:30 2024 -0400
+
+    commit server  brfore start
+
+[33mcommit 29d521be9487e94a83c09bd8b5211aa6af924a16[m
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Fri Apr 5 15:23:28 2024 -0400
+
+    Income List  loaded successfully
+
+[33mcommit d0cb0117c2be0669ea1928c71bbb5fd650f41120[m
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Fri Apr 5 12:06:39 2024 -0400
+
+    commit before shifting income to incomesetup
+
+[33mcommit 04345484459ca4cf221b705d3cea2da6733d4666[m
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Fri Apr 5 10:05:29 2024 -0400
+
+    This code resolve cores exception changes on vite.confic.js file
+
+[33mcommit 9fb39ecf1328180bea95a519b76e51f9bebabebd[m
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Fri Apr 5 10:00:15 2024 -0400
+
+    Setting updated
+
+[33mcommit 790566f7d659b70574af20cf9ca5f49a8baea03f[m
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Fri Apr 5 09:45:22 2024 -0400
+
+    tets
+
+[33mcommit b2e76cd61b8c44c5a0189fb2b9329e315c3618f5[m
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Fri Apr 5 09:04:16 2024 -0400
+
+    Chnage comit
+
+[33mcommit e0b24887a7a90ebbac01a346c581cf4dead727d4[m
+Merge: 3b75594 995a076
+Author: Denesh Anandathasan <34461872+DeneshA@users.noreply.github.com>
+Date:   Thu Apr 4 23:41:18 2024 -0400
+
+    Merge pull request #2 from DeneshA/income_branch
+    
+    Income branch - End of the day Commit
+
+[33mcommit 995a0767bc91caa453312fcdbb2b0c6eec5aa58f[m
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Thu Apr 4 23:39:34 2024 -0400
+
+    Income  render Category, Income list Done
+
+[33mcommit 7fc0b1d046812b84eae316b3d456ac58c815cef4[m
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Thu Apr 4 18:08:08 2024 -0400
+
+    Income declaration
+
+[33mcommit 0d0a086120dac817f0b11365daa4a51f67f10d42[m
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Thu Apr 4 17:35:59 2024 -0400
+
+    TEst
+
+[33mcommit 81f51fbae8e88d295f6e262d556cdd36397ec7c6[m
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Thu Apr 4 17:26:17 2024 -0400
+
+     Test Commit
+
+[33mcommit ee7d81296b8e98b79cdd7316573571f621365245[m
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Thu Apr 4 17:15:07 2024 -0400
+
+    testing
+
+[33mcommit a417a25d60e578936a82dd62d26ba3e471bd9f1b[m
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Thu Apr 4 16:57:42 2024 -0400
+
+    Text commit
+
+[33mcommit 8298b6b8cc9eaa22896d3774fc9a0c54a9734dde[m
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Thu Apr 4 16:56:16 2024 -0400
+
+    Commit pull
+
+[33mcommit 6f027f29e3de3d412f3a713d7308fa6a8c02ccb4[m
+Merge: fc4123a 229278b
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Thu Apr 4 14:08:21 2024 -0400
+
+    commit
+
+[33mcommit 229278bbbcf3b9dd3cce1e93b66d9954f9e1cc52[m
+Merge: f1d3e15 3b75594
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Thu Apr 4 14:07:47 2024 -0400
+
+    commit pull
+
+[33mcommit fc4123a300e278cae720cdb3c4c1ade480709903[m
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Thu Apr 4 14:03:55 2024 -0400
+
+    Commit Income created
+
+[33mcommit 91bf966b74433e272a5e9e659766b6086dc0d6ba[m
+Merge: 90f8d91 f1d3e15
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Thu Apr 4 11:21:42 2024 -0400
+
+    pull commint from main
+
+[33mcommit f1d3e155dee9a019efc79795923ae425913a3a99[m
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Thu Apr 4 11:20:14 2024 -0400
+
+    pull commit from main
+
+[33mcommit 3b755943dfd09ef7bac4ba9db03d0da040ffff0e[m
+Merge: cc79679 90f8d91
+Author: Denesh Anandathasan <34461872+DeneshA@users.noreply.github.com>
+Date:   Thu Apr 4 11:18:24 2024 -0400
+
+    Merge pull request #1 from DeneshA/income_branch
+    
+    Income model created completed all backend codes
+
+[33mcommit 90f8d9124e7ef2fff53a1c4752507508f3e8de37[m
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Thu Apr 4 11:16:01 2024 -0400
+
+    Income model created completed all backend codes
+
+[33mcommit cc79679fa9e8d4453eb1920ba57f46210458bbc6[m
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Thu Apr 4 09:15:06 2024 -0400
+
+    ERD updated
+
+[33mcommit c0a3fc31054e95a0562e6f3508214d45cd56c3df[m
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Thu Apr 4 09:08:07 2024 -0400
+
+     comonent Arch updated
+
+[33mcommit e957e925b9d422ab4859184aac930c2184f562ac[m
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Thu Apr 4 09:04:39 2024 -0400
+
+    wireframe updated
+
+[33mcommit 46c4ca08680d05174ddd231233dd1f6d77df0827[m
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Thu Apr 4 08:56:01 2024 -0400
+
+    updated Readme file
+
+[33mcommit 8262bc4a8cb20688517faa6b08da0ed4abe2bfea[m
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Wed Apr 3 23:15:08 2024 -0400
+
+    Category 50%  left with design
+
+[33mcommit 4b3f66ea502431e72f2fb96f4428bb434f3d27fb[m
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Wed Apr 3 19:59:39 2024 -0400
+
+     Category Edit completed
+
+[33mcommit 2ae24a7a58eb8bc48229cb57710a8927b72c9c19[m
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Wed Apr 3 19:16:41 2024 -0400
+
+     sucessfully fetch Category into table
+
+[33mcommit b394bdede5a64f0a5316d5468498fbf3c42b72ee[m
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Wed Apr 3 18:39:09 2024 -0400
+
+    Category Read ooperation created
+
+[33mcommit 94bf016d9fd18d33d150b181b668d7e72fab2cb1[m
+Author: Denesh Anandathasan <denesh555@gmail.com>
+Date:   Wed Apr 3 10:09:40 2024 -0400
+
+    Category Backend  complete
+
+[33mcommit d35f28a9f154caece370552542ec99c6c82afc74[m
+Author: Denesh Anandathasan <34461872+DeneshA@users.noreply.github.com>
+Date:   Tue Apr 2 22:41:14 2024 -0400
+
+    Initial commit
