@@ -5,13 +5,19 @@ import interactionPlugin from '@fullcalendar/interaction'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import '../styles/Reminder.css'
-import { start } from 'init'
+import { useAuth } from '../context/AuthContext'
+
 
 export default function Reminder() {
-    const [reminders, setReminders] = useState([])
-    
 
+    const [reminders, setReminders] = useState([])
+
+    const {setPageTitle} = useAuth()
+   
     useEffect(() => {
+
+        
+    setPageTitle("REMINDER")
         // const userId = localStorage.getItem('userId')
         fetch(`http://localhost:8000/expense/`)
             .then(response => response.json())

@@ -19,7 +19,7 @@ export default function Category() {
 
     const [alertMessage,setAlertMessage] = useState('')
     const [alertType, setAlertType] = useState('')
-
+    
     const {setPageTitle} = useAuth()
     
     //Setting timeout to clear the Alert MSG

@@ -2,9 +2,8 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { PieChart, Pie, Tooltip, Cell } from 'recharts'
 import { useNavigate, useParams } from "react-router-dom"
-// import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend, ResponsiveContainer } from 'recharts'
-
-// import IncomeList from './IncomeList'
+import { useAuth } from '../context/AuthContext'
+import { jwtDecode } from "jwt-decode"
 import  '../styles/Income.css'
 
 // import IncomeBarchar from './IncomeBarChart'
@@ -18,12 +17,16 @@ const [userID,setUserID] = useState('')
 
   const navigate = useNavigate()
 
+  const {setPageTitle} = useAuth()
+  
   useEffect(() => {
     setUserID(1)
+   
+    setPageTitle("MONTHLY EXPENSE CHART")
     axios.get('http://localhost:8000/expense/')
       .then(response => {
         setExpenseList(response.data)
-        console.log(expenselist)
+        // console.log(expenselist)
       })
       .catch(error => {
        
@@ -32,7 +35,9 @@ const [userID,setUserID] = useState('')
   }, [])
 
   useEffect(() => {
-    setUserID(`http://localhost:8000/users/${1}/`)
+    const token = localStorage.getItem('token')
+    const tokenDecoded = jwtDecode(token)
+    setUserID(`http://localhost:8000/users/${tokenDecoded.id}/`)
     // Only convert budget when incomeList is updated and not empty
     if (expenselist.length > 0) {
       const newData = expenselist.map(expense => {
@@ -101,7 +106,7 @@ const [userID,setUserID] = useState('')
   return (
     <div className="expense-container main-container">
       <div className='pie-chart-container'>
-        <h2>Monthly Average Expenses</h2>
+        {/* <h2>Monthly Average Expenses</h2> */}
       <PieChart width={250} height={250}>
         <Pie
           data={data}
@@ -119,8 +124,11 @@ const [userID,setUserID] = useState('')
         </Pie>
         <Tooltip />
       </PieChart>
+      <div className='buttons-container'>
       <div><button type="button" className="btn" id="expense-list-btn" value={'list'} onClick={handleNavigation}>List</button></div>
       <div><button type="button" className="btn" id="setup-expense" value={'setup'} onClick={handleNavigation}>Setup</button></div>
+      </div>
+      
       </div>
 
       

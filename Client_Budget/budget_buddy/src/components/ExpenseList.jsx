@@ -1,11 +1,12 @@
 import axios from "axios"
 import React, { useState, useEffect } from "react"
 import { useNavigate , Link} from 'react-router-dom'
-
+import { jwtDecode } from "jwt-decode"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import { faPenSquare } from '@fortawesome/free-solid-svg-icons'
+import { useAuth } from '../context/AuthContext'
 
 import '../styles/Income.css'
 
@@ -16,6 +17,9 @@ export default function ExpenseList() {
     const [expenseList, setExpenseList] = useState([])
     const [alertMessage, setAlertMessage] = useState('')
     const [alertType, setAlertType] = useState('')
+    const [userID,setUserID] = useState('')
+   
+    const {setPageTitle} = useAuth()
 
 
     //Setting timeout to clear the Alert MSG
@@ -28,13 +32,18 @@ export default function ExpenseList() {
     }
 
      useEffect(() => {
-
+      
+        
+        setPageTitle("EXPENSE LIST")
+        const token = localStorage.getItem('token')
+        const tokenDecoded = jwtDecode(token)
+        setUserID(tokenDecoded.id)
         const fetchExpenseList = async () => {
             await axios.get('http://localhost:8000/expense/')
                 .then(response => {
-                    // console.log("tttttt", response.data)
+                   
                     setExpenseList(response.data)
-                    // console.log("Income Test ", incomeList)
+                 
                 })
                 .catch(error => {
                     setAlertMessage("Error Unable to fetch records : " + (error.response ? error.response.data : error.message))
@@ -46,7 +55,7 @@ export default function ExpenseList() {
     }, [expenseList])
 
     const handleUpdate = (expenseId) => {
-        console.log("Pick ",expenseId)
+        // console.log("Pick ",expenseId)
         navigate(`/setupexpense/${expenseId}`)
         // navigate(`/income/${incomeId}`)
     }

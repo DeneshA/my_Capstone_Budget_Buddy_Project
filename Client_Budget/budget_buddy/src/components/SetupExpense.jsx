@@ -3,6 +3,8 @@ import { useState,useEffect } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { jwtDecode } from "jwt-decode"
 
+import { useAuth } from '../context/AuthContext'
+
 import {Link} from 'react-router-dom'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -36,6 +38,8 @@ export default function SetupExpense(){
     const [alertType, setAlertType] = useState('')
 
     
+    const {setPageTitle} = useAuth()
+
     let {expenseId} = useParams()
     
     const navigate = useNavigate()
@@ -117,7 +121,7 @@ export default function SetupExpense(){
 
     useEffect(() => {
         // console.log(incomeID)
-       
+        setPageTitle("SETUP EXPENSE")
         fetchData()
         fetchCategoryList()
         fetchExistingExpenseData(expenseId)

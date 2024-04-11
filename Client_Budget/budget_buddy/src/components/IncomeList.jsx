@@ -2,6 +2,7 @@ import axios from "axios"
 import React, { useState, useEffect } from "react"
 import { useNavigate , Link} from 'react-router-dom'
 
+import { useAuth } from '../context/AuthContext'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
@@ -17,7 +18,8 @@ export default function IncomeList() {
     const [alertMessage, setAlertMessage] = useState('')
     const [alertType, setAlertType] = useState('')
 
-
+    const {setPageTitle} = useAuth()
+   
     //Setting timeout to clear the Alert MSG
     const handleAlertTimer = () => {
         setTimeout(() => {
@@ -28,7 +30,8 @@ export default function IncomeList() {
     }
 
      useEffect(() => {
-
+        
+        setPageTitle("INCOME LIST")
         const fetchIncomeList = async () => {
             await axios.get('http://localhost:8000/income/')
                 .then(response => {

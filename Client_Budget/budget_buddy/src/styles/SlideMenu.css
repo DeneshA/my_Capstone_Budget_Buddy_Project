@@ -86,6 +86,31 @@ body {
   } 
 
   .page-title-container{
-    font-size: 30px;
+    font-size: 35px;
     font-weight: 700;
   }
+
+  /* Responsive Design */
+  /* Desktops */
+  @media (max-width: 1024px) { 
+    .page-title-container{
+      font-size: 30px;
+      font-weight: 600;
+    }
+  }
+  /* Tablets */
+  @media (max-width: 768px) { 
+    .page-title-container{
+      font-size: 25px;
+      font-weight: 500;
+    }
+  
+  }
+  /* Mobile Phones */
+  @media (max-width: 480px) { 
+    .page-title-container{
+      font-size: 20px;
+      font-weight: 400;
+    }
+}
+  

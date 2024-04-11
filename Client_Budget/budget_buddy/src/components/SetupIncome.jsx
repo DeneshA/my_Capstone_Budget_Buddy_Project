@@ -2,6 +2,7 @@ import axios from "axios"
 import { useState,useEffect } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { jwtDecode } from "jwt-decode"
+import { useAuth } from '../context/AuthContext'
 
 // import {Link} from 'react-router-dom'
 
@@ -34,7 +35,8 @@ export default function SetupIncome(){
     const [alertMessage,setAlertMessage] = useState('')
     const [alertType, setAlertType] = useState('')
 
-  
+    const {setPageTitle} = useAuth()
+
     let {incomeId} = useParams()
 
     const navigate = useNavigate()
@@ -117,7 +119,8 @@ export default function SetupIncome(){
 
 
     useEffect(() => {
-        
+       
+        setPageTitle("SETUP INCOME")
         fetchCategoryList()
         fetchExistingIncomeData(incomeId)
     },[incomeId])

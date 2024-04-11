@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { PieChart, Pie, Tooltip, Cell } from 'recharts'
 import { useNavigate, useParams } from "react-router-dom"
 import { jwtDecode } from "jwt-decode"
-// import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend, ResponsiveContainer } from 'recharts'
+
+import { useAuth } from '../context/AuthContext'
 
 import IncomeList from './IncomeList'
 import  '../styles/Income.css'
@@ -17,9 +18,13 @@ export default function IncomeChart() {
   const [userID,setUserID] = useState('')
 
   const navigate = useNavigate()
+  
+  const {setPageTitle} = useAuth()
+
 
   useEffect(() => {
-    setUserID(1)
+  
+  setPageTitle("MONTHLY INCOME CHART")
     axios.get('http://localhost:8000/income/')
       .then(response => {
         setIncomeList(response.data)
@@ -121,8 +126,10 @@ export default function IncomeChart() {
         </Pie>
         <Tooltip />
       </PieChart>
+      <div className='buttons-container'>
       <div><button type="button" className="btn" id="income-list-btn" value={'list'} onClick={handleNavigation}>List</button></div>
       <div><button type="button" className="btn" id="setup-income" value={'setup'} onClick={handleNavigation}>Setup</button></div>
+      </div>
       </div>
 
       {/* <div className='bar-chart-income'>
