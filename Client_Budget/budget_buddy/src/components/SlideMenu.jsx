@@ -8,7 +8,7 @@ import '../styles/SlideMenu.css'
 export default function SlideMenu() {
     const navigation = useNavigate()
 
-    const { logout, setUserID } = useAuth()
+    const { logout, setUserID, comTitle} = useAuth()
 
     // const [userId, setUserID] = useState('')
     const [userName, setUserName] = useState('')
@@ -85,7 +85,7 @@ export default function SlideMenu() {
                 <a href="#">CATEGORY</a>
                 <a href="#">REMINDER</a>
             </div>
-
+            <div className='page-title-container'>{comTitle}</div>
             <div className="user-section">
                 <span className="user-name">{`Welcome ! ${userFirstName}`}</span>
                 <a href="/"  className="logout-link" onClick={HandleSignout}>Logout</a>

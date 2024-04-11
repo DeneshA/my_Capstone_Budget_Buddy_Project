@@ -96,19 +96,56 @@ body, html {
     justify-content: space-between; 
     margin-bottom: 20px; 
 }
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .form-floating {
-      flex-direction: column;
+ /* Responsive Design */
+  /* Desktops */
+  @media (max-width: 1024px) { 
+    .btn, .form-floating input, .form-floating select {
+      width: 95%; 
+    }
+     .category-container {
+      width: 90%; 
+      height: 800px; 
+    }
+  }
+  /* Tablets */
+  @media (max-width: 768px) { 
+    .category-container, .btn {
+      width: 95%; 
     }
   
-    .btn {
-      width: 100%; 
-      margin-bottom: 10px;
+    .form-floating, .btn {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
     }
   
     .category-container {
-      margin: 10px;
-      padding: 15px;
+    
+      width: 80%; 
+      height: 700px; 
+    }
+    .btn {
+      margin-bottom: 10px; 
     }
   }
+  /* Mobile Phones */
+  @media (max-width: 480px) { 
+    .form-floating label, .alert, .btn, .form-floating input, .form-floating select {
+      font-size: smaller; 
+  
+    .btn {
+      width: 100%; 
+      margin-right: 0; 
+    }
+  
+    .category-container {
+      margin: 20px;
+      padding: 20px;
+      width: 90%; 
+      min-height: 500px;
+      max-width: 95%;
+      /* justify-content: center; */
+    }
+  }
+}
+  

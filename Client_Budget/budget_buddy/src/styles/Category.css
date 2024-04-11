@@ -5,12 +5,16 @@
     --error-red: #f44336; /* error color */
   }
   
-  body, html {
+  /* body, html {
     margin: 10px;
     padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--light-green);
-  }
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  } */
   
   .category-container {
     margin: 20px auto;
@@ -19,7 +23,10 @@
     box-shadow: 0 2px 4px black;
     background-color: white;
     max-width: 800px; 
-  
+    max-height: 800px;
+    overflow-y:scroll;
+    scroll-behavior: smooth;
+    margin: auto;
   }
   .category-display{
     max-height: 500px;
@@ -31,7 +38,7 @@
     flex-direction: column;
     margin-bottom: 15px;
   }
-  
+
   .form-floating label {
     margin-bottom: 5px;
     text-align: left;
@@ -62,6 +69,12 @@
     background-color: var(--dark-green);
   }
   
+  .button-container{
+    display: flex;
+    justify-content: space-between; 
+    margin-bottom: 20px; 
+  }
+
   .alert {
     margin-bottom: 20px;
     padding: 10px;
@@ -105,18 +118,54 @@
     color: white;
   }
   /* Responsive Design */
-  @media (max-width: 768px) {
-    .form-floating {
-      flex-direction: column;
+  /* Desktops */
+  @media (max-width: 1024px) { 
+    .btn, .form-floating input, .form-floating select {
+      width: 95%; 
+    }
+     .category-container {
+      width: 90%; 
+      height: 800px; 
+    }
+  }
+  /* Tablets */
+  @media (max-width: 768px) { 
+    .category-container, .btn {
+      width: 95%; 
     }
   
-    .btn {
-      width: 100%; 
-      margin-bottom: 10px; 
+    .form-floating, .btn {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
     }
   
     .category-container {
-      margin: 10px;
-      padding: 15px;
+    
+      width: 80%; 
+      height: 700px; 
+    }
+    .btn {
+      margin-bottom: 10px; 
     }
   }
+  /* Mobile Phones */
+  @media (max-width: 480px) { 
+    .form-floating label, .alert, .btn, .form-floating input, .form-floating select {
+      font-size: smaller; 
+  
+    .btn {
+      width: 100%; 
+      margin-right: 0; 
+    }
+  
+    .category-container {
+      margin: 20px;
+      padding: 20px;
+      width: 100%; 
+      min-height: 800px;
+      /* justify-content: center; */
+    }
+  }
+}
+  

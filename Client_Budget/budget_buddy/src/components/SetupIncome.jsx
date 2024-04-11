@@ -234,7 +234,7 @@ export default function SetupIncome(){
 
     return(
         <div className="main-container">
-            <div className="chart-container"></div>
+            {/* <div className="chart-container"></div> */}
             <div className="income-container">
                 {/* <h3>SETUP INCOME</h3> */}
                 <form onSubmit={handelSubmit}>

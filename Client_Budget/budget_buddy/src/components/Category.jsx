@@ -1,5 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { useAuth } from '../context/AuthContext'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
@@ -19,6 +20,7 @@ export default function Category() {
     const [alertMessage,setAlertMessage] = useState('')
     const [alertType, setAlertType] = useState('')
 
+    const {setPageTitle} = useAuth()
     
     //Setting timeout to clear the Alert MSG
     const handleAlertTimer = () => {
@@ -43,6 +45,7 @@ export default function Category() {
             })
     }
     useEffect(() => {
+        setPageTitle("SETUP CATEGORY")
         fetchData()
     },[])
 
@@ -162,7 +165,7 @@ export default function Category() {
 
     return (
         <div className="category-container">
-            <h3>SET UP CATEGORY</h3>
+            {/* <h3 className="page-titile">SET UP CATEGORY</h3> */}
             <form onSubmit={handleSubmit}>                
                 <div className="form-floating">
                 <label htmlFor="category_name">Category Name : </label>                
@@ -205,7 +208,7 @@ export default function Category() {
 
                 </div>
                 
-                <div className="form-floating">
+                <div className="form-floating-1 button-container">
                     <button type="button" className="btn" id="clear-btn" onClick={handleClear}>CLEAR</button>
                     <button type="submit" className="btn" id="save-btn">SAVE</button>
                     <button type="button" className="btn" id="edit-btn" onClick={handleUpdate}>EDIT</button>

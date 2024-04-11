@@ -9,6 +9,7 @@ export function useAuth() {
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [userId,setUserId] =useState('')
+  const [comTitle,setComTitle] =useState('')
 
   const login = () => setIsLoggedIn(true)
   const logout = () =>{ 
@@ -20,8 +21,11 @@ export const AuthProvider = ({ children }) => {
       setUserId(id)
     }
 
+    const setPageTitle =(title) => {
+        setComTitle(title)
+    }
   return (
-    <AuthContext.Provider value={{ isLoggedIn, login, logout, userId, setUserID }}>
+    <AuthContext.Provider value={{ isLoggedIn, login, logout, userId, setUserID , comTitle,setPageTitle }}>
       {children}
     </AuthContext.Provider>
   )
