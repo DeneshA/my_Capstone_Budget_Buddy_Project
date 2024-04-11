@@ -19,9 +19,11 @@
     box-shadow: 0 2px 4px black;
     background-color: white;
     max-width: 800px; 
+  
   }
   .category-display{
-    overflow-y: hidden;
+    max-height: 500px;
+    overflow-y:scroll;
     scroll-behavior: smooth;
   }
   .form-floating {

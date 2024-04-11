@@ -1,4 +1,5 @@
 import SlideMenu from './SlideMenu'
+import '../styles/Template.css'
 
 export default function Header(){
     return (

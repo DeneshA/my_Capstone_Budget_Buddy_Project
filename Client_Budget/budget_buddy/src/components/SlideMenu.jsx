@@ -74,10 +74,10 @@ export default function SlideMenu() {
 
     return (
         <nav className="navbar">
-            {/* <button className="menu-button" onClick={toogleMenu}>
+            <button className="menu-button" onClick={toogleMenu}>
                 &#9776; 
-            </button> */}
-            {/* <div className={`curtain-menu ${isSlideMenuOpen ? 'open':''}`}>
+            </button>
+            <div className={`curtain-menu ${isSlideMenuOpen ? 'open':''}`}>
                 <button className='close-menu' onClick={closeMenu}>&times;</button>
                 <a href="#">INCOME</a>
                 <a href="#">EXPENSE</a>
@@ -89,7 +89,7 @@ export default function SlideMenu() {
             <div className="user-section">
                 <span className="user-name">{`Welcome ! ${userFirstName}`}</span>
                 <a href="/"  className="logout-link" onClick={HandleSignout}>Logout</a>
-            </div> */}
+            </div>
         </nav>
     )
 }
