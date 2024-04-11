@@ -1,20 +1,19 @@
-import axios from "axios";
-import { useState,useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios"
+import { useState,useEffect } from "react"
+import { useNavigate, useParams } from "react-router-dom"
+import { jwtDecode } from "jwt-decode"
 
 import {Link} from 'react-router-dom'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faList } from '@fortawesome/free-solid-svg-icons';
-import { faLayerGroup } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faList } from '@fortawesome/free-solid-svg-icons'
+import { faLayerGroup } from '@fortawesome/free-solid-svg-icons'
 
 import '../styles/Income.css'
 
 
-// const BASE_URL = process.env.REACT__APP_BASE_URL
-// console.log(BASE_URL)
 const BASE_URL = (component,value) => { return `http://localhost:8000/${component}/${value}/` }
-// console.log(BASE_URL('users',12))
+
 
 export default function SetupExpense(){
 
@@ -36,9 +35,9 @@ export default function SetupExpense(){
     const [alertMessage,setAlertMessage] = useState('')
     const [alertType, setAlertType] = useState('')
 
-    // const [paramID,setParamID] = useState('')
+    
     let {expenseId} = useParams()
-    console.log("expense Id  is ",expenseId)
+    
     const navigate = useNavigate()
     
     //Setting timeout to clear the Alert MSG
@@ -49,47 +48,48 @@ export default function SetupExpense(){
                 ,3000)
     }
     const fetchCategoryList = () => {
+        const token = localStorage.getItem('token')
+
         axios.get('http://localhost:8000/category/')
             .then(response =>  {
                 setCategoryList(response.data)    
-                // console.log("Category",response.data)           
+                         
             })
+            .then(() => {
+                const tokenDecoded = jwtDecode(token)                
+                setUserID(tokenDecoded.id)
+            }) 
             .catch(error => {
                 setAlertMessage("Error Unable to fetch category records : " + (error.response ? error.response.data : error.message))
                 setAlertType("error")
                 handleAlertTimer()
             })
     }
-    // const fetchData = () => {
-    //     axios.get('http://localhost:8000/expense/')
-    //         .then(response => {
-    //             // console.log(response.data)
-    //             setExpenseList(response.data)
-    //             // console.log(incomelist)                
-    //             handelClear()
-    //             // fetchCategoryList()
-
-    //             // /Hardcoding UserID
-    //             setUserID(1)
-                
-    //         })
-    //         .catch(error => {
-    //             setAlertMessage("Error Unable to fetch expense records : " + (error.response ? error.response.data : error.message))
-    //             setAlertType("error")
-    //             handleAlertTimer()
-    //         })
-    // }
+    const fetchData = () => {
+        axios.get('http://localhost:8000/expense/')
+            .then(response => {
+                // console.log(response.data)
+                setExpenseList(response.data)
+                // console.log(incomelist)                
+                handelClear()
+                              
+            })
+            .catch(error => {
+                setAlertMessage("Error Unable to fetch expense records : " + (error.response ? error.response.data : error.message))
+                setAlertType("error")
+                handleAlertTimer()
+            })
+    }
 
     const fetchExistingExpenseData = (expenseId) => {
-  
+        if(expenseId){
         axios.get(`http://localhost:8000/expense/${expenseId}`)
             .then(response => {
-                console.log("Fetch data ",response.data)
-                const data = response.data;
-
-                // Assuming your API always returns a URL ending with a numeric ID
-                const userId = data.user_id.split('/').filter(Boolean).pop(); // '2'
-                const categoryId = data.category_id.split('/').filter(Boolean).pop(); // '2'
+                // console.log("Fetch data ",response.data)
+                const data = response.data
+                
+                const userId = data.user_id.split('/').filter(Boolean).pop()
+                const categoryId = data.category_id.split('/').filter(Boolean).pop()
         
                 setExpenseID(data.id)
                 setUserID(userId)
@@ -111,13 +111,14 @@ export default function SetupExpense(){
                 setAlertType("error")
                 handleAlertTimer()
             })
+        }
     }
 
 
     useEffect(() => {
         // console.log(incomeID)
        
-        // fetchData()
+        fetchData()
         fetchCategoryList()
         fetchExistingExpenseData(expenseId)
         // console.log(incomeID)
@@ -150,7 +151,7 @@ export default function SetupExpense(){
             day = '0' + day
     
         return [year, month, day].join('-')
-    };
+    }
     
     
  
@@ -163,6 +164,10 @@ export default function SetupExpense(){
             setAlertType('error')            
         } else if(billCycle === 'None'){
             setAlertMessage('Select a bill cycle')
+            setAlertType('error')
+        }
+        else if (!categoryID || !startDate || !endDate || !billDate || !durationTerms){
+            setAlertMessage('Please fill all the fields')
             setAlertType('error')
         }
         try{
@@ -188,7 +193,7 @@ export default function SetupExpense(){
                     // console.log(response.data)
                     setAlertMessage('Expense successfully Edited')
                     setAlertType('success')
-                    // fetchData()
+                    fetchData()
                     handelClear()
                 } else {                
                     setAlertMessage('Unable to edit Expense')

@@ -1,20 +1,19 @@
-import axios from "axios";
-import { useState,useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios"
+import { useState,useEffect } from "react"
+import { useNavigate, useParams } from "react-router-dom"
+import { jwtDecode } from "jwt-decode"
 
-import {Link} from 'react-router-dom'
+// import {Link} from 'react-router-dom'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faList } from '@fortawesome/free-solid-svg-icons';
-import { faLayerGroup } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faList } from '@fortawesome/free-solid-svg-icons'
+// import { faLayerGroup } from '@fortawesome/free-solid-svg-icons'
 
 import '../styles/Income.css'
 
 
-// const BASE_URL = process.env.REACT__APP_BASE_URL
-// console.log(BASE_URL)
 const BASE_URL = (component,value) => { return `http://localhost:8000/${component}/${value}/` }
-// console.log(BASE_URL('users',12))
+
 
 export default function SetupIncome(){
 
@@ -35,11 +34,9 @@ export default function SetupIncome(){
     const [alertMessage,setAlertMessage] = useState('')
     const [alertType, setAlertType] = useState('')
 
-    // const [paramID,setParamID] = useState('')
+  
     let {incomeId} = useParams()
-    // setIncomeID(incomeId)
-    // setParamID(incomeID)
-    console.log("Income Id  is ",incomeId)
+
     const navigate = useNavigate()
     
     //Setting timeout to clear the Alert MSG
@@ -50,28 +47,34 @@ export default function SetupIncome(){
                 ,3000)
     }
     const fetchCategoryList = () => {
+        const token = localStorage.getItem('token')
+
         axios.get('http://localhost:8000/category/')
             .then(response =>  {
                 setCategoryList(response.data)    
                 // console.log("Category",response.data)           
             })
+            .then(() => {
+                const tokenDecoded = jwtDecode(token)
+                // console.log("Token Dec",tokenDecoded)
+                setUserID(tokenDecoded.id)
+            })   
             .catch(error => {
                 setAlertMessage("Error Unable to fetch category records : " + (error.response ? error.response.data : error.message))
                 setAlertType("error")
                 handleAlertTimer()
             })
-    }
-    const fetchData = () => {
+            
+            }
+                const fetchData = () => {
         axios.get('http://localhost:8000/income/')
             .then(response => {
                 // console.log(response.data)
                 setIncomeList(response.data)
                 // console.log(incomelist)                
                 handelClear()
-                // fetchCategoryList()
 
-                // /Hardcoding UserID
-                setUserID(1)
+               
                 
             })
             .catch(error => {
@@ -82,32 +85,26 @@ export default function SetupIncome(){
     }
 
     const fetchExistingIncomeData = (incomeId) => {
-  
-        axios.get(`http://localhost:8000/income/${incomeId}`)
+        if(incomeId){
+        axios.get(`http://localhost:8000/income/${incomeId}/`)
             .then(response => {
-                console.log("Fetch data ",response.data)
-                const data = response.data;
+                //console.log("Fetch data ",response.data)
+                const data = response.data
 
-                // Assuming your API always returns a URL ending with a numeric ID
-                const userId = data.user_id.split('/').filter(Boolean).pop(); // '2'
-                const categoryId = data.category_id.split('/').filter(Boolean).pop(); // '2'
+                
+                const userId = data.user_id.split('/').filter(Boolean).pop()
+                const categoryId = data.category_id.split('/').filter(Boolean).pop()
         
-                setIncomeID(data.id);
-                setUserID(userId);
-                setCategoryID(categoryId);
-                setDuration(data.duration.toString()); // Ensure this is a string if your input expects one
-                setDurationTerms(data.duration_terms);
-                setStartDate(data.start_date);
-                setEndDate(data.end_date || ''); // Handle null values
-                setBillAmount(data.bill_amount.toString()); // Ensure this is a string if your input expects one
-                setBillCycle(data.bill_cycle);
-                setNote(data.notes || ''); // Handle empty string
-                            
-                // handelClear()
-                // fetchCategoryList()
-
-                // /Hardcoding UserID
-                // setUserID(1)
+                setIncomeID(data.id)
+                setUserID(userId)
+                setCategoryID(categoryId)
+                setDuration(data.duration.toString()) 
+                setDurationTerms(data.duration_terms)
+                setStartDate(data.start_date)
+                setEndDate(data.end_date || '')
+                setBillAmount(data.bill_amount.toString())
+                setBillCycle(data.bill_cycle)
+                setNote(data.notes || '')
                 
             })
             .catch(error => {
@@ -115,19 +112,14 @@ export default function SetupIncome(){
                 setAlertType("error")
                 handleAlertTimer()
             })
+        }
     }
 
 
     useEffect(() => {
-        // console.log(incomeID)
-       
-        // fetchData()
+        
         fetchCategoryList()
         fetchExistingIncomeData(incomeId)
-        // console.log(incomeID)
-
-        
-
     },[incomeId])
 
     const handelClear = () => {
@@ -152,7 +144,7 @@ export default function SetupIncome(){
             day = '0' + day
     
         return [year, month, day].join('-')
-    };
+    }
     
     
  
@@ -186,7 +178,6 @@ export default function SetupIncome(){
                         }
                 })
                 if (responseEdit.data) {
-                    // console.log(response.data)
                     setAlertMessage('Income successfully Edited')
                     setAlertType('success')
                     fetchData()
@@ -214,7 +205,6 @@ export default function SetupIncome(){
                     }
             })
             if (response.data) {
-                // console.log(response.data)
                 setAlertMessage('Saved successfully Saved')
                 setAlertType('success')
                 fetchData()
@@ -224,7 +214,6 @@ export default function SetupIncome(){
                 setAlertType('error')
             }
             }
-            // console.log(response.data)
         } catch (error) {
             console.error('There was an error!', error.response ? error.response.data : error.message)
             setAlertMessage('Unable to process save/edit operation')

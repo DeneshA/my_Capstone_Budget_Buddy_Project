@@ -1,13 +1,13 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { PieChart, Pie, Tooltip, Cell } from 'recharts';
-import { useNavigate, useParams } from "react-router-dom";
-// import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend, ResponsiveContainer } from 'recharts';
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+import { PieChart, Pie, Tooltip, Cell } from 'recharts'
+import { useNavigate, useParams } from "react-router-dom"
+import { jwtDecode } from "jwt-decode"
+// import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend, ResponsiveContainer } from 'recharts'
 
-import IncomeList from './IncomeList';
+import IncomeList from './IncomeList'
 import  '../styles/Income.css'
 
-import IncomeBarchar from './IncomeBarChart'
 
 export default function IncomeChart() {
 
@@ -31,8 +31,12 @@ export default function IncomeChart() {
   }, [])
 
   useEffect(() => {
-    setUserID(`http://localhost:8000/users/${2}/`)
-    // Only convert budget when incomeList is updated and not empty
+    const token = localStorage.getItem('token')
+    const tokenDecoded = jwtDecode(token)
+    // console.log("Token Dec",tokenDecoded)
+    
+    setUserID(`http://localhost:8000/users/${tokenDecoded.id}/`)
+   
     if (incomeList.length > 0) {
       const newData = incomeList.map(income => {
         let value
@@ -73,13 +77,13 @@ export default function IncomeChart() {
 
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042','#FF8085',
                   '#FFAA28','#89C49F', '#FTGB28','#FF9575','#FFAA84',
-                  '#81H49F','#0568FE', '#28C49F','#FFBC58'];
+                  '#81H49F','#0568FE', '#28C49F','#FFBC58']
 
-  const RADIAN = Math.PI / 180;
+  const RADIAN = Math.PI / 180
   const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-    const x = cx + radius * Math.cos(-midAngle * RADIAN);
-    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5
+    const x = cx + radius * Math.cos(-midAngle * RADIAN)
+    const y = cy + radius * Math.sin(-midAngle * RADIAN)
     return (
       <text x={x} y={y} fill="black" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
         {`${(percent * 100).toFixed(0)}%`}

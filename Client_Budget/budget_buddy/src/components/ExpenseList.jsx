@@ -3,9 +3,9 @@ import React, { useState, useEffect } from "react"
 import { useNavigate , Link} from 'react-router-dom'
 
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
-import { faPenSquare } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
+import { faPenSquare } from '@fortawesome/free-solid-svg-icons'
 
 import '../styles/Income.css'
 

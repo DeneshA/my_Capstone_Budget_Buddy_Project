@@ -2,14 +2,14 @@
     --primary-green: #4CAF50; /* A vibrant green */
     --dark-green: #388E3C; /* A darker shade for contrasts or hover effects */
     --light-green: #C8E6C9; /* A light green for backgrounds or accents */
-    --error-red: #f44336; /* Keeping the error color as it is essential for UX */
+    --error-red: #f44336; /* error color */
   }
   
   body, html {
     margin: 10px;
     padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--light-green); /* Light background for the whole page */
+    background-color: var(--light-green);
   }
   
   .category-container {
@@ -18,8 +18,7 @@
     border-radius: 8px;
     box-shadow: 0 2px 4px black;
     background-color: white;
-    max-width: 800px; /* Ensures container doesn't stretch too much on wider screens */
-    
+    max-width: 800px; 
   }
   .category-display{
     overflow-y: hidden;
@@ -34,7 +33,7 @@
   .form-floating label {
     margin-bottom: 5px;
     text-align: left;
-    color: var(--dark-green); /* Dark green text for better readability and theme consistency */
+    color: var(--dark-green);
   }
   
   .form-floating input[type="text"],
@@ -43,9 +42,8 @@
     padding: 10px;
     border: 1px solid var(--primary-green);
     border-radius: 4px;
-    margin-bottom: 10px; /* Ensures spacing between elements */
+    margin-bottom: 10px; 
   }
-  
   .btn {
     background-color: var(--primary-green);
     color: white;
@@ -82,13 +80,19 @@
   .table-category-list {
     width: 100%;
     border-collapse: collapse;
+    /* overflow-y: auto; */
   }
   
   .table-category-list th, .table-category-list td {
     text-align: left;
     padding: 8px;
   }
-  
+  .category-display{
+    height: 350px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+
+  }
   .table-category-list tr:nth-child(even) {
     background-color: var(--light-green);
   }
@@ -105,8 +109,8 @@
     }
   
     .btn {
-      width: 100%; /* Makes button full width on smaller screens */
-      margin-bottom: 10px; /* Adds space between stacked buttons */
+      width: 100%; 
+      margin-bottom: 10px; 
     }
   
     .category-container {
