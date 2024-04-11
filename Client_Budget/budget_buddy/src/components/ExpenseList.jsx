@@ -39,16 +39,20 @@ export default function ExpenseList() {
         const tokenDecoded = jwtDecode(token)
         setUserID(tokenDecoded.id)
         const fetchExpenseList = async () => {
-            await axios.get('http://localhost:8000/expense/')
-                .then(response => {
-                   
-                    setExpenseList(response.data)
-                 
+            try {
+                const response = await axios.get('http://localhost:8000/expense/')
+                const filteredExpenses = response.data.filter(exp => {
+                    // Extracting user ID from the URL
+                    const urlSegments = exp.user_id.split('/')
+                    const expUserID = urlSegments[urlSegments.length - 2]
+                    return expUserID == userID
                 })
-                .catch(error => {
-                    setAlertMessage("Error Unable to fetch records : " + (error.response ? error.response.data : error.message))
-                    setAlertType("error")
-                })
+                setExpenseList(filteredExpenses)
+            } catch (error) {
+                const errorMessage = "Error Unable to fetch records : " + (error.response ? error.response.data : error.message)
+                setAlertMessage(errorMessage)
+                setAlertType("error")
+            }
         }
         fetchExpenseList()
 
