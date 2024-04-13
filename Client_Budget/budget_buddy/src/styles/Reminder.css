@@ -14,6 +14,7 @@
 
 .reminder-container{
     display: flex;
+    flex-direction: column;
     margin: 20px auto;
     padding: 20px;
     border-radius: 8px;
@@ -22,5 +23,8 @@
     max-width: 800px; 
     height: 550px; 
     width: auto;
+    font-size: large;
+  
+
     
   }

@@ -15,6 +15,7 @@ export default function Reminder() {
     const {setPageTitle} = useAuth()
     const [userID,setUserID] = useState('')
     const [events,setEvents] =useState([])
+    const [isEvent,setIsEvent] = useState('')
    
     useEffect(() => {
 
@@ -22,6 +23,25 @@ export default function Reminder() {
         const tokenDecoded = jwtDecode(token)
         setUserID(tokenDecoded.id)
         setPageTitle("REMINDER")
+
+        if (isEvent === 'Income')
+        {
+            fetch(`http://localhost:8000/income/`)
+            .then(response => response.json())
+            .then(data => {            
+                const formattedReminders = data.map(item => 
+                    (  {                       
+                            title: item.category_name,
+                            start: item.start_date,
+                            end: item.end_Date,                                           
+                }))
+                setReminders(formattedReminders)
+            })
+            .catch(error => {
+                console.error('Error fetching events:', error)
+            })    
+        }
+        else{
         // const userId = localStorage.getItem('userId')
         fetch(`http://localhost:8000/expense/`)
             .then(response => response.json())
@@ -37,6 +57,7 @@ export default function Reminder() {
             .catch(error => {
                 console.error('Error fetching events:', error)
             })    
+        }
         // const fetchData = async () => {
         //     try {
         //         // Fetch Expenses
@@ -68,10 +89,18 @@ export default function Reminder() {
         // }
     
         // fetchData()
-    }, []);
+    }, [isEvent]);
 
         return (
             <div className="reminder-container">
+                <div className='main'>
+                    <label htmlFor="event-type">Event Type : </label>
+                    <select className="event-type" id="event_type" value={isEvent} onChange={(e) => setIsEvent(e.target.value)}>
+                        <option value="Income">Income</option>
+                        <option value="Expense">Expense</option>
+                    </select>
+                </div><br />
+                <div className='calender'>
                 <FullCalendar
                     plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
                     initialView="dayGridMonth"
@@ -81,6 +110,8 @@ export default function Reminder() {
                     height="520px"
                     events={reminders}
                 />
+                </div>
+                
             </div>
         )
     }
