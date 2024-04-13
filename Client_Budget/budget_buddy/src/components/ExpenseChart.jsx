@@ -20,7 +20,7 @@ const [userID,setUserID] = useState('')
   const {setPageTitle} = useAuth()
   
   useEffect(() => {
-    setUserID(1)
+    // setUserID(1)
    
     setPageTitle("MONTHLY EXPENSE CHART")
     axios.get('http://localhost:8000/expense/')
@@ -107,7 +107,7 @@ const [userID,setUserID] = useState('')
     <div className="expense-container main-container">
       <div className='pie-chart-container'>
         {/* <h2>Monthly Average Expenses</h2> */}
-      <PieChart width={250} height={250}>
+      <PieChart  width={250} height={250}>
         <Pie
           data={data}
           cx="50%"

@@ -2,6 +2,7 @@ import axios from 'axios'
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import Signup from './Signup'
 import '../styles/Signin.css'
 
 export default function Signin() {
@@ -13,27 +14,53 @@ export default function Signin() {
     const [userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
 
+    const [alertMessage, setAlertMessage] = useState('')
+    const [alertType, setAlertType] = useState('')
+
+    //Setting timeout to clear the Alert MSG
+    const handleAlertTimer = () => {
+        setTimeout(() => {
+            setAlertMessage('')
+            setAlertType('')
+        }
+            , 3000)
+    }
+    const HandleNavigate = () => {
+        navigation('/signup')
+    }
     const HandleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const response = await axios.post('http://localhost:8000/signin/', {
-                username: userName,
-                password: password},
-            {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                withCredentials: true,
-            })
-            if (response.status === 200) {
-                console.log(response.data.jwt)
-                localStorage.setItem('token', response.data.jwt)
-                login()
-                navigation('/')
+            if (!userName || !password) {
+                setAlertMessage("Please enter User anme/Password")
+                setAlertType('error')
+                handleAlertTimer()
+                return false
             }
-        } catch (error) {
-            console.error('Error during sign in:', error.response ? error.response.data : error.message)
+            else {
+                const response = await axios.post('http://localhost:8000/signin/', {
+                    username: userName,
+                    password: password
+                },
+                    {
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        withCredentials: true,
+                    })
+                if (response.status === 200) {
+                    console.log(response.data.jwt)
+                    localStorage.setItem('token', response.data.jwt)
+                    login()
+                    navigation('/')
+                }
+                
+            }
 
+        } catch (error) {
+            setAlertMessage('Error : please verify your credientials - ', error.response ? error.response.data : error.message)
+            setAlertType('error')
+            handleAlertTimer()
         }
     }
     return (
@@ -57,9 +84,15 @@ export default function Signin() {
 
                 </div>
 
-                <button className="btn btn-primary w-100 py-2" type="submit">Sign in</button><br></br><br />
+                <button className="btn btn-primary w-100 py-2" type="submit" onClick={HandleNavigate}>Sign in</button><br></br><br />
                 <button className="btn btn-primary sign-up w-100 py-2" type="button" onClick={() => navigation('/signup')}>Sign Up</button>
-
+                <div className="alert-container">
+                    {alertMessage && (
+                        <div className={`alert ${alertType === 'success' ? 'alert-success' : 'alert-error'}`}>
+                            {alertMessage}
+                        </div>
+                    )}
+                </div>
             </form>
 
             <div className="footer-container">
