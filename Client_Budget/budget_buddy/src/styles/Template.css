@@ -9,7 +9,7 @@
     margin: 10px;
     padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--light-green); /* Light background for the whole page */
+    background-color: var(--light-green); 
   }
 /* .main-container {
     display: flex;
@@ -23,7 +23,7 @@
   border-radius: 8px;
   box-shadow: 0 2px 4px black;
   background-color: white;
-  max-width: 800px; /* Ensures container doesn't stretch too much on wider screens */
+  max-width: 800px; 
   
 }
 
@@ -44,7 +44,7 @@
   .form-floating label {
     margin-bottom: 5px;
     text-align: left;
-    color: var(--dark-green); /* Dark green text for better readability and theme consistency */
+    color: var(--dark-green);
   }
   
   .form-floating input[type="text"],
@@ -53,7 +53,7 @@
     padding: 10px;
     border: 1px solid var(--primary-green);
     border-radius: 4px;
-    margin-bottom: 10px; /* Ensures spacing between elements */
+    margin-bottom: 10px; 
   }
   
   .btn {
@@ -128,8 +128,8 @@
     }
   
     .btn {
-      width: 100%; /* Makes button full width on smaller screens */
-      margin-bottom: 10px; /* Adds space between stacked buttons */
+      width: 100%; 
+      margin-bottom: 10px; 
     }
   
     .category-container {

@@ -15,8 +15,8 @@ function App() {
   return (
     < div className='App-container'>
       {!isLoggedIn ?
-        (<Signin />) :
-        <>
+         (<Signin />) : 
+         <>
           <Header />
 
           <div className='main-wrap-container'>
@@ -25,7 +25,7 @@ function App() {
 
           <Footer />
         </>
-      } 
+       }  
 
     </div>
   )

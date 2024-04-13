@@ -107,6 +107,8 @@ body, html {
       width: 90%; 
       height: 800px; 
     }
+  
+  
   }
   /* Tablets */
   @media (max-width: 768px) { 
